@@ -1,5 +1,5 @@
 import React from 'react';
-import { homeObjThree, homeObjFour } from './Data';
+import { homeObjTwo, homeObjThree } from './Data';
 import { InfoSection } from '../../components';
 
 
@@ -7,8 +7,8 @@ const Blog = () => {
     return (
         <>
            <h1> Blog </h1>
+           <InfoSection {...homeObjTwo}/> 
            <InfoSection {...homeObjThree}/> 
-           <InfoSection {...homeObjFour}/> 
         </>
     )
 }

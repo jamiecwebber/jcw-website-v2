@@ -19,14 +19,14 @@ import {
 
 const InfoSection = ({ 
     primary,
-    lightBg, 
+    background, 
     imgStart, 
+    lightText,
     lightTopLine, 
     lightTextDesc, 
     buttonLabel, 
     description, 
-    headline, 
-    lightText, 
+    headline,  
     topLine,
     start,
     img,
@@ -34,7 +34,7 @@ const InfoSection = ({
 }) => {
     return (
         <>
-            <InfoSec lightBg={lightBg}>
+            <InfoSec background={background}>
                 <Container>
                     <InfoRow imgStart={imgStart}>
                         <InfoColumn>

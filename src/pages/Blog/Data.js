@@ -1,6 +1,6 @@
 export const homeObjOne = {
     primary: true,
-    lightBg: false, 
+    background: false, 
     imgStart: '', 
     lightTopLine: true, 
     lightTextDesc: true, 
@@ -16,7 +16,7 @@ export const homeObjOne = {
 
 export const homeObjTwo = {
     primary: true,
-    lightBg: false, 
+    background: 'PeachPuff', 
     imgStart: true, 
     lightTopLine: true, 
     lightTextDesc: true, 
@@ -32,7 +32,7 @@ export const homeObjTwo = {
 
 export const homeObjThree = {
     primary: false,
-    lightBg: true, 
+    background: 'PowderBlue', 
     imgStart: '', 
     lightTopLine: true, 
     lightTextDesc: true, 
@@ -48,7 +48,7 @@ export const homeObjThree = {
 
 export const homeObjFour = {
     primary: true,
-    lightBg: false, 
+    background: false, 
     imgStart: true, 
     lightTopLine: true, 
     lightTextDesc: true, 
