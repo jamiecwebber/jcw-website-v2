@@ -44,8 +44,8 @@ const Navbar = () => {
                 <Nav>
                     <NavbarContainer>
                         <NavLogo to="/" onClick={closeMobileMenu}>
-                            <NavIcon />
-                            ULTRA
+                            {/* <NavIcon /> */}
+                            Jamie Christopher Webber
                         </NavLogo>
                         <MobileIcon onClick={handleClick}>
                             {click ? <FaTimes /> : <FaBars />}
@@ -71,7 +71,7 @@ const Navbar = () => {
                                     Blog
                                 </NavLinks>
                             </NavItem>
-                            <NavItemBtn>
+                            {/* <NavItemBtn>
                                 {button ? (
                                     <NavBtnLink to='/sign-up'>
                                         <Button primary>SIGN UP</Button>
@@ -81,7 +81,7 @@ const Navbar = () => {
                                         <Button fontBig primary>SIGN UP</Button>
                                     </NavBtnLink>
                                 )}
-                            </NavItemBtn>
+                            </NavItemBtn> */}
                         </NavMenu>
                     </NavbarContainer>
                 </Nav>

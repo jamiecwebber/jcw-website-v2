@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container } from '../../globalStyles';
 
 export const Nav = styled.nav`
-    background: Green;
+    background: Turquoise;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -28,7 +28,7 @@ export const NavLogo = styled(Link)`
     justify-self: flex-start;
     cursor: pointer;
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
 `;
@@ -76,7 +76,7 @@ export const NavItem = styled.li`
     border-bottom: 2px solid transparent;
 
     &:hover {
-        border-bottom: 2px solid #4b59f7;
+        border-bottom: 2px solid Thistle;
     }
 
     @media screen and (max-width: 960px) {
