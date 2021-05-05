@@ -7,8 +7,7 @@ import {
     NavbarContainer,
     NavTitleContainer,
     NavLogo, 
-    NavIcon,
-    NavSubtitle, 
+    NavIcon, 
     MobileIcon,
     NavMenu,
     NavItem,
@@ -50,9 +49,9 @@ const Navbar = () => {
                                 {/* <NavIcon /> */}
                                 Jamie Christopher Webber - 
                             </NavLogo>
-                            <NavSubtitle>
+                            <NavLogo to="/" onClick={closeMobileMenu}>
                                 Composer & Audio Programmer
-                            </NavSubtitle>
+                            </NavLogo>
                         </NavTitleContainer>
                         <MobileIcon onClick={handleClick}>
                             {click ? <FaTimes /> : <FaBars />}

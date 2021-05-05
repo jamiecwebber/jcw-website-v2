@@ -5,7 +5,7 @@ import { Container } from '../../globalStyles';
 
 export const Nav = styled.nav`
     background: Turquoise;
-    height: 80px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,37 +13,53 @@ export const Nav = styled.nav`
     position: sticky;
     top: 0;
     z-index: 999;
+
+    @media screen and (max-width: 960px) {
+        height: 80px;
+    };
 `;
 
 export const NavbarContainer = styled(Container)`
     display: flex;
     justify-content: space-between;
-    height: 80px;
+    height: 50px;
 
     ${Container}
+
+    @media screen and (max-width: 960px) {
+        height: 80px;
+    };
 `;
 
 export const NavTitleContainer = styled.div`
     display: flex;
-    color: Snow;
-    
+    justify-content: center;
+
     @media screen and (max-width: 960px) {
         flex-direction: column;
     };
 `
 
 export const NavLogo = styled(Link)`
-
+    
+    color: WhiteSmoke;
     justify-self: flex-start;
     cursor: pointer;
     text-decoration: none;
     font-size: 1.3rem;
     display: flex;
     align-items: center;
+    margin-right: 3px;
 `;
 
-export const NavSubtitle = styled.h2`
-`
+// export const NavSubtitle = styled.h2`
+
+// color: WhiteSmoke;
+//     justify-self: flex-start;
+//     cursor: pointer;
+//     text-decoration: none;
+//     font-size: 1.3rem;   
+// `
 
 export const NavIcon = styled(FaMagento)`
     margin-right: 0.5rem;
@@ -84,15 +100,16 @@ export const NavMenu = styled.ul`
 `;
 
 export const NavItem = styled.li`
-    height: 80px;
-    border-bottom: 2px solid transparent;
+    height: 50px;
+    border-bottom: 3px solid transparent;
 
     &:hover {
-        border-bottom: 2px solid Thistle;
+        border-bottom: 3px solid Thistle;
     }
 
     @media screen and (max-width: 960px) {
         width: 100%;
+        height: 80px;
 
         &:hover {
             border: none;
@@ -109,7 +126,7 @@ export const NavLinks = styled(Link)`
     height: 100%;
 
     @media screen and (max-width: 960px) {
-        color: lavender;
+        color: turquoise;
         text-align: center;
         padding: 2rem;
         width: 100%;
