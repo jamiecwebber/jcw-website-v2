@@ -4,9 +4,11 @@ import { IconContext } from 'react-icons/lib';
 import { Button } from '../../globalStyles';
 import { 
     Nav, 
-    NavbarContainer, 
+    NavbarContainer,
+    NavTitleContainer,
     NavLogo, 
-    NavIcon, 
+    NavIcon,
+    NavSubtitle, 
     MobileIcon,
     NavMenu,
     NavItem,
@@ -43,10 +45,15 @@ const Navbar = () => {
             <IconContext.Provider value={{color: '#fff'}}>
                 <Nav>
                     <NavbarContainer>
-                        <NavLogo to="/" onClick={closeMobileMenu}>
-                            {/* <NavIcon /> */}
-                            Jamie Christopher Webber
-                        </NavLogo>
+                        <NavTitleContainer>
+                            <NavLogo to="/" onClick={closeMobileMenu}>
+                                {/* <NavIcon /> */}
+                                Jamie Christopher Webber - 
+                            </NavLogo>
+                            <NavSubtitle>
+                                Composer & Audio Programmer
+                            </NavSubtitle>
+                        </NavTitleContainer>
                         <MobileIcon onClick={handleClick}>
                             {click ? <FaTimes /> : <FaBars />}
                         </MobileIcon>

@@ -23,8 +23,17 @@ export const NavbarContainer = styled(Container)`
     ${Container}
 `;
 
+export const NavTitleContainer = styled.div`
+    display: flex;
+    color: Snow;
+    
+    @media screen and (max-width: 960px) {
+        flex-direction: column;
+    };
+`
+
 export const NavLogo = styled(Link)`
-    color: white;
+
     justify-self: flex-start;
     cursor: pointer;
     text-decoration: none;
@@ -32,6 +41,9 @@ export const NavLogo = styled(Link)`
     display: flex;
     align-items: center;
 `;
+
+export const NavSubtitle = styled.h2`
+`
 
 export const NavIcon = styled(FaMagento)`
     margin-right: 0.5rem;
@@ -67,7 +79,7 @@ export const NavMenu = styled.ul`
         left: ${({click}) => (click ? 0 : '-100%')};
         opacity: 1;
         transition: all 0.5s ease;
-        background: orange;
+        background: WhiteSmoke;
     }
 `;
 
@@ -89,7 +101,7 @@ export const NavItem = styled.li`
 `;
 
 export const NavLinks = styled(Link)`
-    color: white;
+    color: WhiteSmoke;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -97,13 +109,14 @@ export const NavLinks = styled(Link)`
     height: 100%;
 
     @media screen and (max-width: 960px) {
+        color: lavender;
         text-align: center;
         padding: 2rem;
         width: 100%;
         display: table;
 
         &:hover {
-            color: #4b59f7;
+            color: Thistle;
             transition: all 0.3s ease;
         }
     }
