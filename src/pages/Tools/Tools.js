@@ -6,11 +6,7 @@ import { InfoSection } from '../../components';
 const Tools = () => {
     return (
         <>
-            <h1> TOOOOLS </h1>
-           <InfoSection {...homeObjOne}/>
-           <InfoSection {...homeObjTwo}/> 
-           <InfoSection {...homeObjThree}/> 
-           <InfoSection {...homeObjFour}/> 
+            <h1> TOOLS </h1>
         </>
     )
 }

@@ -24,7 +24,7 @@ import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa'
 const Footer = () => {
     return (
         <FooterContainer>
-            <FooterSubscription>
+            {/* <FooterSubscription>
                 <FooterSubHeading>
                     Subheading text
                 </FooterSubHeading>
@@ -35,42 +35,30 @@ const Footer = () => {
                     <FormInput name="email" type="email" placeholder="Your Email" />
                     <Button fontBig>Subscribe</Button>
                 </Form>
-            </FooterSubscription>
+            </FooterSubscription> */}
             <FooterLinksContainer>
                 <FooterLinksWrapper>
                     <FooterLinksItems>
                         <FooterLinkTitle>About Us</FooterLinkTitle>
-                        <FooterLink to='/sign-up'>How it works</FooterLink>
-                        <FooterLink to='/works'>Music</FooterLink>
-                        <FooterLink to='/tools'>Programming</FooterLink>
-                        <FooterLink to='/blog'>Solipsism and Lunacy</FooterLink>
+                        <FooterLink to='/about'>How it works</FooterLink>
                     </FooterLinksItems>
                     <FooterLinksItems>
                         <FooterLinkTitle>Music</FooterLinkTitle>
-                        <FooterLink to='/sign-up'>How it works</FooterLink>
                         <FooterLink to='/works'>Music</FooterLink>
-                        <FooterLink to='/tools'>Programming</FooterLink>
-                        <FooterLink to='/blog'>Solipsism and Lunacy</FooterLink>
                     </FooterLinksItems>
                 </FooterLinksWrapper>
                 <FooterLinksWrapper>
                     <FooterLinksItems>
-                        <FooterLinkTitle>Programming</FooterLinkTitle>
-                        <FooterLink to='/sign-up'>How it works</FooterLink>
-                        <FooterLink to='/works'>Music</FooterLink>
-                        <FooterLink to='/tools'>Programming</FooterLink>
-                        <FooterLink to='/blog'>Solipsism and Lunacy</FooterLink>
+                        <FooterLinkTitle>Tools</FooterLinkTitle>
+                        <FooterLink to='/tools'>Combination Tone Calculator</FooterLink>
                     </FooterLinksItems>
                     <FooterLinksItems>
                         <FooterLinkTitle>Blog</FooterLinkTitle>
-                        <FooterLink to='/sign-up'>How it works</FooterLink>
-                        <FooterLink to='/works'>Music</FooterLink>
-                        <FooterLink to='/tools'>Programming</FooterLink>
                         <FooterLink to='/blog'>Solipsism and Lunacy</FooterLink>
                     </FooterLinksItems>
                 </FooterLinksWrapper>
             </FooterLinksContainer>
-            <SocialMedia>
+            {/* <SocialMedia>
                 <SocialMediaWrapper>
                     <SocialLogo to='/'>
                         <SocialIcon />
@@ -89,7 +77,7 @@ const Footer = () => {
                         </SocialIconLink>
                     </SocialIcon>
                 </SocialMediaWrapper>
-            </SocialMedia>
+            </SocialMedia> */}
         </FooterContainer>
     )
 }
