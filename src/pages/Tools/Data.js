@@ -1,16 +1,13 @@
 export const homeObjOne = {
-    primary: true,
-    background: true, 
-    imgStart: '', 
-    lightText: false, 
-    lightTopLine: false, 
-    lightTextDesc: false, 
-    buttonLabel: 'Get Started', 
-    description: '', 
-    headline: '', 
-    
-    topLine: 'Angry and frustrated with the world',
+    background: '#eeffee', 
     img: require('../../images/greybackground.jpg').default,
-    alt: 'Hey',
-    start: ''
+    heading: "microtonal music",
+    comment: "spectral combination tone calculator"
+};
+
+export const homeObjTwo = {
+    background: '#BF99BF', 
+    img: require('../../images/bluepointy.jpg').default,
+    heading: "generative music",
+    comment: "using programming to create absurd new sounds"
 };

@@ -6,11 +6,7 @@ import { InfoSection } from '../../components';
 const Works = () => {
     return (
         <>
-            <h3>Work it</h3>
-           <InfoSection {...homeObjOne}/>
-           <InfoSection {...homeObjTwo}/> 
-           <InfoSection {...homeObjThree}/> 
-           <InfoSection {...homeObjFour}/> 
+            <h3>Works</h3>
         </>
     )
 }

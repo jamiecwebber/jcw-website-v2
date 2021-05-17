@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
     ColourBlock,
     BackgroundBlock
@@ -10,13 +9,16 @@ import {
 
 const BackgroundSection = ({
     img,
-    background
+    background,
+    heading,
+    comment
 }) => {
     return (
         <Container>
             <ColourBlock background={background}>
                 <BackgroundBlock img={img}>
-
+                    <h1>{heading}</h1>
+                    <h2>{comment}</h2>
                 </BackgroundBlock>
             </ColourBlock>    
         </Container>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container } from '../../globalStyles';
 
 export const Nav = styled.nav`
-    background: Turquoise;
+    background-color: Turquoise;
     height: 50px;
     display: flex;
     justify-content: center;
@@ -104,7 +104,7 @@ export const NavItem = styled.li`
     border-bottom: 3px solid transparent;
 
     &:hover {
-        border-bottom: 3px solid Thistle;
+        border-bottom: 5px solid Thistle;
     }
 
     @media screen and (max-width: 960px) {

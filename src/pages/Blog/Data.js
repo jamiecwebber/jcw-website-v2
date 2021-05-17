@@ -1,18 +1,3 @@
-export const homeObjOne = {
-    primary: true,
-    background: false, 
-    imgStart: '', 
-    lightTopLine: true, 
-    lightTextDesc: true, 
-    buttonLabel: 'Get Started', 
-    description: 'content', 
-    headline: 'Microtonal music', 
-    lightText: true, 
-    topLine: 'Composer',
-    img: require('../../images/greybackground.jpg').default,
-    alt: 'Hey',
-    start: ''
-};
 
 export const homeObjTwo = {
     primary: true,
@@ -25,7 +10,7 @@ export const homeObjTwo = {
     headline: 'Micro', 
     lightText: true, 
     topLine: 'Composer',
-    img: require('../../images/bluepointy.jpg').default,
+    img: require('../../images/blueswirl.jpg').default,
     alt: 'Hey',
     start: ''
 };
@@ -37,8 +22,8 @@ export const homeObjThree = {
     lightTopLine: true, 
     lightTextDesc: true, 
     buttonLabel: 'Get Started', 
-    description: 'SUPER COOL DUDE. TOTALLY WORKING AT COOL STUFF', 
-    headline: 'Micromicromicrodoot', 
+    description: 'Projects', 
+    headline: 'Microtonal', 
     lightText: false, 
     topLine: 'Composer',
     img: require('../../images/greentexture.png').default,
@@ -46,18 +31,3 @@ export const homeObjThree = {
     start: ''
 };
 
-export const homeObjFour = {
-    primary: true,
-    background: false, 
-    imgStart: true, 
-    lightTopLine: true, 
-    lightTextDesc: true, 
-    buttonLabel: 'Get Started', 
-    description: 'SUPER COOL DUDE. TOTALLY WORKING AT COOL STUFF', 
-    headline: 'Micromicromicrodoot', 
-    lightText: true, 
-    topLine: 'Composer',
-    img: require('../../images/nicelightblue.gif').default,
-    alt: 'Hey',
-    start: ''
-};

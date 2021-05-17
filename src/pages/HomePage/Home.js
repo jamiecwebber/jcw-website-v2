@@ -6,7 +6,6 @@ import { InfoSection, BackgroundSection } from '../../components';
 const Home = () => {
     return (
         <>
-            
            <BackgroundSection {...homeObjTwo}/>
            <BackgroundSection {...homeObjOne}/>
         </>

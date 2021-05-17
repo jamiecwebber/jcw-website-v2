@@ -1,14 +1,14 @@
 import React from 'react';
 import { homeObjTwo, homeObjThree } from './Data';
-import { InfoSection } from '../../components';
+import { InfoSection, BackgroundSection } from '../../components';
 
 
 const Blog = () => {
     return (
         <>
            <h1> Blog </h1>
-           <InfoSection {...homeObjTwo}/> 
-           <InfoSection {...homeObjThree}/> 
+           <BackgroundSection {...homeObjTwo}/> 
+           <BackgroundSection {...homeObjThree}/> 
         </>
     )
 }
