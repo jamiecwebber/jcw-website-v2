@@ -1,5 +1,5 @@
 import { useState, useEvent } from 'react'
-import { CTControls , CTGrid, CTContainer, NoteSlider, Label } from './CombinationToneCalculator.elements'
+import { CTControls , CTGrid, CTGridRow, CTContainer, NoteSlider, Label , GridNote, GridLine, GridLineBig} from './CombinationToneCalculator.elements'
 
 let midiToFrequency = (midi) => {
     return Math.pow(2,((midi-69)/12)) * 440;
@@ -21,6 +21,8 @@ let midiToFrequency = (midi) => {
 }
 
   const Note = ({frequency}) => {
+    if (frequency === 0) { return <GridNote></GridNote> }; // returns empty square for freq of 0
+
     let midicents = frequencyToMidicents(frequency);
     
     let cents = Math.round(midicents % 100);
@@ -30,16 +32,14 @@ let midiToFrequency = (midi) => {
     let octave = Math.floor(semitone/12) - 1;
     let notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     let note = notes[semitone % 12];
-    
+
     return (
-      <div className='noteContainer'>
-        <div className='frequency'>{Math.floor(frequency)}</div>
-        <div className='note'>{note}</div>
-        <div className='cents'>
-          {cents >= 0 ? ' +' : ' -'}{Math.abs(cents)}
-        </div>
-        <div className='octave'>{octave}</div>
-      </div>
+      <GridNote>
+          <GridLine>{Math.floor(frequency)}</GridLine>
+          <GridLineBig>{note} {octave} {cents >= 0 ? ' +' : ' -'}{Math.abs(cents)}</GridLineBig>
+          <GridLine>{Math.floor(cents * 81.92 + 8192)}</GridLine>
+      </GridNote>
+
     )
   }
 
@@ -61,19 +61,26 @@ const CTC = (
         setGridSize(event.target.value);
     }
 
-
-
     return (
         <CTContainer>
             <CTControls>
                 <h1>Combination Tone Grid</h1>
-                <Label>Melody: {melodyMIDI} {midiToNote(melodyMIDI)} <NoteSlider type="range" min="1" max="108" value={melodyMIDI} class="slider" onChange={handleMelodyChange} id="melodySlider"/></Label>
-                <Label>Bass: {bassMIDI} {midiToNote(bassMIDI)} <NoteSlider type="range" min="1" max="108" value={bassMIDI} class="slider" onChange={handleBassChange} id="bassSlider"/></Label>
-
-            
+                <Label>Upper: {melodyMIDI} {midiToNote(melodyMIDI)} <NoteSlider type="range" min="1" max="108" value={melodyMIDI} class="slider" onChange={handleMelodyChange} id="melodySlider"/></Label>
+                <Label>Lower: {bassMIDI} {midiToNote(bassMIDI)} <NoteSlider type="range" min="1" max="108" value={bassMIDI} class="slider" onChange={handleBassChange} id="bassSlider"/></Label>
             </CTControls>
             <CTGrid>
-
+              <CTGridRow>
+                <Note frequency={0}/>
+                <Note frequency={midiToFrequency(bassMIDI)}/>
+                <Note frequency={midiToFrequency(bassMIDI)*2}/>
+              </CTGridRow>
+              <CTGridRow>
+                <Note frequency={midiToFrequency(melodyMIDI)}/>
+                <Note frequency={midiToFrequency(bassMIDI)+midiToFrequency(melodyMIDI)}/>
+              </CTGridRow>
+              <CTGridRow>
+                <Note frequency={midiToFrequency(melodyMIDI)*2}/>
+              </CTGridRow>
             </CTGrid>
         </CTContainer>
     )
