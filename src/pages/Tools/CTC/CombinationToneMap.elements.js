@@ -17,8 +17,13 @@ export const CTContainer = styled(Container)`
     }
 `
 
-export const CTControls = styled.div`
-    flex-grow: 1;
+
+
+export const StyledCTControls = styled.div`
+    width: 20vh;
+    height: 10vh;
+    border: 3px solid limegreen;
+    background-color: mediumpurple;
 `
 
 export const Label = styled.div`
@@ -31,6 +36,8 @@ export const Label = styled.div`
 export const NoteSlider = styled.input`
     width: 70%;
 `
+
+
 
 export const StyledCTGrid = styled.div`
     display: grid;

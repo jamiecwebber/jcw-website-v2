@@ -1,4 +1,4 @@
-import { StyledCTGrid, GridColumn, GridNote, GridNoteText } from './CombinationToneMap.elements'
+import { StyledCTGrid, GridColumn, GridNote, GridNoteText, StyledCTControls } from './CombinationToneMap.elements'
 
 let midiToFrequency = (midi) => {
     return Math.pow(2,((midi-69)/12)) * 440;
@@ -19,6 +19,14 @@ const midiToNote = (midi) => {
     return [note, octave];
 }
 
+export const CTControls = ( { leftMIDI, rightMIDI, gridSize } ) => {
+
+    return (
+        <StyledCTControls>blah</StyledCTControls>
+    )
+
+
+}
 
 export const CTGrid = ( { leftMIDI, rightMIDI, gridSize } ) => {
 
