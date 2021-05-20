@@ -31,7 +31,7 @@ const CTMap = (
   
     const [leftMIDI, setLeftMIDI] = useState(40);
     const [rightMIDI, setRightMIDI] = useState(47);
-    const [gridSize, setGridSize] = useState(8);
+    const [gridSize, setGridSize] = useState(3);
     
     const handleLeftChange = (event) => {
         setLeftMIDI(event.target.value);

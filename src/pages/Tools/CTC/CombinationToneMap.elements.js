@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 import { Container } from '../../../globalStyles'
+import greybackground from '../../../images/greybackground.jpg'
 
 export const CTContainer = styled(Container)`
     display: flex;
     flex-direction: row;
-    height: 80vh;
-    margin-top: 15px;
+
+    height: calc(100vh - 50px); 
+    width: 100%;
+
+    background-image: url(${greybackground});
 
     @media screen and (max-width: 991px) {
         flex-direction: column;
@@ -34,8 +38,8 @@ export const StyledCTGrid = styled.div`
     grid-template-rows: repeat( ${({gridSize})=>(gridSize)}, 1 fr); */
     width: 55vh;
     height: 55vh;
-    margin-top: 14vh;
-    margin-right: 7vh;
+    margin-top: 20vh;
+    margin-right: 15vh;
     rotate: -135deg;
 `
 export const GridColumn = styled.div`
