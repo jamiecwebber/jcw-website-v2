@@ -26,18 +26,25 @@ export const StyledCTControls = styled.div`
     margin-top: 7vh;
     margin-right: 3vh;
 
-    border: 3px solid limegreen;
+    border: 8px solid limegreen;
+    border-radius: 15px;
     background-color: mediumpurple;
+
+    padding: 20px;
 `
 
 export const Label = styled.div`
-    width: 90%;
+    width: 95%;
     margin-top: 5px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 `
 
 export const NoteSlider = styled.input`
+    width: 50%;
+`
+
+export const GridSizeSlider = styled.input`
     width: 70%;
 `
 
@@ -73,6 +80,7 @@ export const GridNote = styled.div`
 `
 
 export const GridNoteText = styled.div`
+    margin-top: 15px;
     rotate: -45deg;
 `
 

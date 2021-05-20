@@ -69,7 +69,7 @@ const CTC = (
     return (
         <CTContainer>
             <CTControls>
-                <h1>Combination Tone Grid</h1>
+                <h1>Combination Tone Map</h1>
                 <Label>Upper: {melodyMIDI} {midiToNote(melodyMIDI)} <NoteSlider type="range" min="1" max="108" value={melodyMIDI} class="slider" onChange={handleMelodyChange} id="melodySlider"/></Label>
                 <Label>Lower: {bassMIDI} {midiToNote(bassMIDI)} <NoteSlider type="range" min="1" max="108" value={bassMIDI} class="slider" onChange={handleBassChange} id="bassSlider"/></Label>
             </CTControls>

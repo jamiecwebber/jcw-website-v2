@@ -1,4 +1,5 @@
-import { StyledCTGrid, GridColumn, GridNote, GridNoteText, StyledCTControls } from './CombinationToneMap.elements'
+import { StyledCTGrid, GridColumn, GridNote, GridNoteText, StyledCTControls, Label, NoteSlider, GridSizeSlider } from './CombinationToneMap.elements'
+import { useEffect, useRef } from 'react';
 
 let midiToFrequency = (midi) => {
     return Math.pow(2,((midi-69)/12)) * 440;
@@ -19,10 +20,15 @@ const midiToNote = (midi) => {
     return [note, octave];
 }
 
-export const CTControls = ( { leftMIDI, rightMIDI, gridSize } ) => {
+export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, handleRightChange, handleGridChange } ) => {
 
     return (
-        <StyledCTControls>blah</StyledCTControls>
+        <StyledCTControls>
+            <h1>Combination Tone Grid</h1>
+                <Label><div>Left: {leftMIDI} {midiToNote(leftMIDI)} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <NoteSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftSlider"/></Label>
+                <Label><div>Right: {rightMIDI} {midiToNote(rightMIDI)} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div><NoteSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightSlider"/></Label>
+                <Label>Grid Size: {gridSize} <GridSizeSlider type="range" min="1" max="16" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </Label>
+        </StyledCTControls>
     )
 
 
@@ -30,20 +36,27 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize } ) => {
 
 export const CTGrid = ( { leftMIDI, rightMIDI, gridSize } ) => {
 
-    var loopArray = [...Array(gridSize).keys()];
+    const loopArray = useRef([...Array(gridSize).keys()])
+
+    useEffect(() => {
+        console.log(gridSize);
+        loopArray.current = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+        loopArray.current = loopArray.current.slice(0,gridSize);
+        console.log(loopArray.current);
+    }, [gridSize])
 
     return (
-        <StyledCTGrid>
+        <StyledCTGrid >
             {
-                loopArray.map((i)=>{
+                loopArray.current.map((i)=>{
                     return (
                         <GridColumn>
                             {
-                            loopArray.map((j)=>{
+                            loopArray.current.map((j)=>{
                                 return (
                                     <GridNote leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}>
                                         <GridNoteText>
-                                            { Math.round(i * midiToFrequency(leftMIDI) + j * midiToFrequency(rightMIDI))}
+                                            { (i * midiToFrequency(leftMIDI) + j * midiToFrequency(rightMIDI)).toFixed(2)} Hz
                                         </GridNoteText>
                                     </GridNote>
                                     )

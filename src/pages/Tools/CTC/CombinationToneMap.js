@@ -41,13 +41,16 @@ const CTMap = (
         setRightMIDI(event.target.value);
     }
     
-    const handleGridSizeChange = (event) => {
+    const handleGridChange = (event) => {
         setGridSize(event.target.value);
     }
 
     return (
         <CTContainer>
-            <CTControls leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}></CTControls>
+            <CTControls 
+                leftMIDI={leftMIDI} handleLeftChange={handleLeftChange}
+                rightMIDI={rightMIDI} handleRightChange={handleRightChange}
+                gridSize={gridSize} handleGridChange={handleGridChange}></CTControls>
             <CTGrid leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}></CTGrid>
         </CTContainer>
     )
