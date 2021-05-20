@@ -5,6 +5,7 @@ import greybackground from '../../../images/greybackground.jpg'
 export const CTContainer = styled(Container)`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 
     height: calc(100vh - 50px); 
     width: 100vw;
@@ -20,8 +21,11 @@ export const CTContainer = styled(Container)`
 
 
 export const StyledCTControls = styled.div`
-    width: 20vh;
-    height: 10vh;
+    width: 33%;
+    height: 25%;
+    margin-top: 7vh;
+    margin-right: 3vh;
+
     border: 3px solid limegreen;
     background-color: mediumpurple;
 `
@@ -30,7 +34,7 @@ export const Label = styled.div`
     width: 90%;
     margin-top: 5px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 `
 
 export const NoteSlider = styled.input`
