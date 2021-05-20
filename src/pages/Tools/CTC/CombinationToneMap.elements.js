@@ -7,9 +7,10 @@ export const CTContainer = styled(Container)`
     flex-direction: row;
 
     height: calc(100vh - 50px); 
-    width: 100%;
+    width: 100vw;
 
     background-image: url(${greybackground});
+    background-repeat: repeat;
 
     @media screen and (max-width: 991px) {
         flex-direction: column;
@@ -34,8 +35,6 @@ export const NoteSlider = styled.input`
 export const StyledCTGrid = styled.div`
     display: grid;
     grid-auto-flow: column;
-    /* grid-template-columns: repeat( ${({gridSize})=>(gridSize)}, 1 fr);
-    grid-template-rows: repeat( ${({gridSize})=>(gridSize)}, 1 fr); */
     width: 55vh;
     height: 55vh;
     margin-top: 20vh;
