@@ -5,14 +5,14 @@ let midiToFrequency = (midi) => {
     return Math.pow(2,((midi-69)/12)) * 440;
   }
 
-  let frequencyToMidicents = (frequency) => {
+let frequencyToMidicents = (frequency) => {
     // this calculation assumes A4 = 440Hz = 6900 MIDIcents
     // https://newt.phys.unsw.edu.au/jw/notes.html
     let midicents = 6900 + 1200 * Math.log(frequency/440) / Math.log(2);
     return midicents;
   } 
 
-  const midiToNote = (midi) => {
+const midiToNote = (midi) => {
     let octave = Math.floor(midi/12) - 1;
     
     let notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -20,7 +20,9 @@ let midiToFrequency = (midi) => {
     return [note, octave];
 }
 
-  const Note = ({frequency}) => {
+
+
+const Note = ({frequency}) => {
     if (frequency === 0) { return <GridNote></GridNote> }; // returns empty square for freq of 0
 
     let midicents = frequencyToMidicents(frequency);
@@ -41,8 +43,11 @@ let midiToFrequency = (midi) => {
       </GridNote>
 
     )
-  }
+ }
 
+
+
+ 
 const CTC = (
 ) => {
     const [melodyMIDI, setMelodyMIDI] = useState(52);
