@@ -1,5 +1,6 @@
 import { useState, useEvent } from 'react'
-import { CTControls , CTGrid, GridRow, CTContainer, NoteSlider, Label , GridNote, GridLine, GridLineBig} from './CombinationToneMap.elements'
+import { CTControls , StyledCTGrid, CTContainer, NoteSlider, Label ,} from './CombinationToneMap.elements'
+import { CTGrid } from './CombinationToneMap.components'
 
 let midiToFrequency = (midi) => {
   return Math.pow(2,((midi-69)/12)) * 440;
@@ -50,7 +51,7 @@ const CTMap = (
   
     const [leftMIDI, setLeftMIDI] = useState(48);
     const [rightMIDI, setRightMIDI] = useState(52);
-    const [gridSize, setGridSize] = useState(4);
+    const [gridSize, setGridSize] = useState(8);
     
     const handleLeftChange = (event) => {
         setLeftMIDI(event.target.value);
@@ -66,33 +67,9 @@ const CTMap = (
 
     return (
         <CTContainer>
+            { gridSize }
             <CTControls leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}></CTControls>
-            <CTGrid leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}>
-              <GridRow gridSize={gridSize}>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-              </GridRow>
-              <GridRow gridSize={gridSize}>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-              </GridRow>
-              <GridRow gridSize={gridSize}>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-              </GridRow>
-              <GridRow gridSize={gridSize}>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-                <GridNote></GridNote>
-              </GridRow>
-            </CTGrid>
+            <CTGrid leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}></CTGrid>
         </CTContainer>
     )
 }

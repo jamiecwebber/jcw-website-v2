@@ -27,7 +27,7 @@ export const NoteSlider = styled.input`
     width: 70%;
 `
 
-export const CTGrid = styled.div`
+export const StyledCTGrid = styled.div`
     display: grid;
     /* grid-template-columns: repeat( ${({gridSize})=>(gridSize)}, 1 fr);
     grid-template-rows: repeat( ${({gridSize})=>(gridSize)}, 1 fr); */
@@ -47,19 +47,12 @@ export const GridNote = styled.div`
     border: 1px solid gray;
     border-radius: 3px;
     margin: 2px;
-    
     background-color: lightpink;
+
+
     &:hover {
             background-color: Thistle;
             transition: all 0.3s ease;
         }
 `
 
-export const GridLine = styled.div`
-    font-size: 0.8rem;
-`
-
-export const GridLineBig = styled.div`
-    font-size: 1rem;
-    font-weight: bold;
-`
