@@ -2,26 +2,6 @@ import { useState, useEvent } from 'react'
 import { CTControls , StyledCTGrid, CTContainer, NoteSlider, Label ,} from './CombinationToneMap.elements'
 import { CTGrid } from './CombinationToneMap.components'
 
-let midiToFrequency = (midi) => {
-  return Math.pow(2,((midi-69)/12)) * 440;
-}
-
-let frequencyToMidicents = (frequency) => {
-  // this calculation assumes A4 = 440Hz = 6900 MIDIcents
-  // https://newt.phys.unsw.edu.au/jw/notes.html
-  let midicents = 6900 + 1200 * Math.log(frequency/440) / Math.log(2);
-  return midicents;
-} 
-
-const midiToNote = (midi) => {
-  let octave = Math.floor(midi/12) - 1;
-  
-  let notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-  let note = notes[midi % 12];
-  return [note, octave];
-}
-
-
 
 // const Note = ({frequency}) => {
 //     if (frequency === 0) { return <GridNote></GridNote> }; // returns empty square for freq of 0
@@ -49,8 +29,8 @@ const midiToNote = (midi) => {
 const CTMap = (
 ) => {
   
-    const [leftMIDI, setLeftMIDI] = useState(48);
-    const [rightMIDI, setRightMIDI] = useState(52);
+    const [leftMIDI, setLeftMIDI] = useState(40);
+    const [rightMIDI, setRightMIDI] = useState(47);
     const [gridSize, setGridSize] = useState(8);
     
     const handleLeftChange = (event) => {
@@ -67,7 +47,6 @@ const CTMap = (
 
     return (
         <CTContainer>
-            { gridSize }
             <CTControls leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}></CTControls>
             <CTGrid leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}></CTGrid>
         </CTContainer>

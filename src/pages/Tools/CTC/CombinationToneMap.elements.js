@@ -29,18 +29,18 @@ export const NoteSlider = styled.input`
 
 export const StyledCTGrid = styled.div`
     display: grid;
+    grid-auto-flow: column;
     /* grid-template-columns: repeat( ${({gridSize})=>(gridSize)}, 1 fr);
     grid-template-rows: repeat( ${({gridSize})=>(gridSize)}, 1 fr); */
     width: 55vh;
     height: 55vh;
     margin-top: 14vh;
     margin-right: 7vh;
-    rotate:-45deg;
+    rotate: -135deg;
 `
-export const GridRow = styled.div`
+export const GridColumn = styled.div`
     display: grid;
-    grid-auto-flow: column;
-    /* grid-template-columns: repeat( ${({gridSize})=>(gridSize)}, 1 fr); */
+    grid-auto-flow: row;
 `
 
 export const GridNote = styled.div`
@@ -48,11 +48,17 @@ export const GridNote = styled.div`
     border-radius: 3px;
     margin: 2px;
     background-color: lightpink;
-
+    rotate: -180deg;
+    width: ${({gridSize}) => ((55/gridSize) + "vh")};
+    height: ${({gridSize}) => ((55/gridSize) + "vh")};
 
     &:hover {
             background-color: Thistle;
             transition: all 0.3s ease;
         }
+`
+
+export const GridNoteText = styled.div`
+    rotate: -45deg;
 `
 
