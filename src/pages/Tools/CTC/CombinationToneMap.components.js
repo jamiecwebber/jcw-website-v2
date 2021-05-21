@@ -35,24 +35,14 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, h
 }
 
 export const CTGrid = ( { leftMIDI, rightMIDI, gridSize } ) => {
-
-    const loopArray = useRef([...Array(gridSize).keys()])
-
-    useEffect(() => {
-        console.log(gridSize);
-        loopArray.current = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-        loopArray.current = loopArray.current.slice(0,gridSize);
-        console.log(loopArray.current);
-    }, [gridSize])
-
     return (
         <StyledCTGrid >
             {
-                loopArray.current.map((i)=>{
+                [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].slice(0,gridSize).map((i) => {
                     return (
                         <GridColumn>
                             {
-                            loopArray.current.map((j)=>{
+                            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].slice(0,gridSize).map((j)=>{
                                 return (
                                     <GridNote leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}>
                                         <GridNoteText>

@@ -1,4 +1,4 @@
-import { useState, useEvent } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CTContainer } from './CombinationToneMap.elements'
 import { CTGrid, CTControls } from './CombinationToneMap.components'
 
@@ -32,6 +32,7 @@ const CTMap = (
     const [leftMIDI, setLeftMIDI] = useState(40);
     const [rightMIDI, setRightMIDI] = useState(47);
     const [gridSize, setGridSize] = useState(8);
+
     
     const handleLeftChange = (event) => {
         setLeftMIDI(event.target.value);
