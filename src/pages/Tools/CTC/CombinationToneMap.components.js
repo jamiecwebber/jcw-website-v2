@@ -1,4 +1,4 @@
-import { StyledCTGrid, GridColumn, GridNote, GridNoteText, StyledCTControls, Label, NoteSlider, GridSizeSlider } from './CombinationToneMap.elements'
+import { StyledCTGrid, GridColumn, StyledGridNote, GridNoteText, StyledCTControls, Label, NoteSlider, GridSizeSlider } from './CombinationToneMap.elements'
 import { useEffect, useRef } from 'react';
 
 let midiToFrequency = (midi) => {
@@ -21,7 +21,6 @@ const midiToNote = (midi) => {
 }
 
 export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, handleRightChange, handleGridChange } ) => {
-
     return (
         <StyledCTControls>
             <h1>Combination Tone Grid</h1>
@@ -30,8 +29,18 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, h
                 <Label>Grid Size: {gridSize} <GridSizeSlider type="range" min="1" max="16" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </Label>
         </StyledCTControls>
     )
+}
 
+const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right}) => {
 
+    return (
+        <StyledGridNote leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}>
+            <GridNoteText>
+                { (left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI)).toFixed(2)} Hz
+                { midiToNote((left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI)).toFixed(2))}
+            </GridNoteText>
+        </StyledGridNote>
+    )
 }
 
 export const CTGrid = ( { leftMIDI, rightMIDI, gridSize } ) => {
@@ -44,11 +53,7 @@ export const CTGrid = ( { leftMIDI, rightMIDI, gridSize } ) => {
                             {
                             [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].slice(0,gridSize).map((j)=>{
                                 return (
-                                    <GridNote leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}>
-                                        <GridNoteText>
-                                            { (i * midiToFrequency(leftMIDI) + j * midiToFrequency(rightMIDI)).toFixed(2)} Hz
-                                        </GridNoteText>
-                                    </GridNote>
+                                    <GridNote leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize} left={i} right={j} />
                                     )
                                 })
                             }

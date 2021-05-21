@@ -64,7 +64,7 @@ export const GridColumn = styled.div`
     grid-auto-flow: row;
 `
 
-export const GridNote = styled.div`
+export const StyledGridNote = styled.div`
     border: 1px solid gray;
     border-radius: 3px;
     margin: 2px;
