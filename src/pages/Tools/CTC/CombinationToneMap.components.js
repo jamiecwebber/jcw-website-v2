@@ -34,7 +34,7 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, h
 const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right}) => {
 
     return (
-        <StyledGridNote leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}>
+        <StyledGridNote leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize} left={left} right={right}>
             <GridNoteText gridSize={gridSize}>
                 { (left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI)).toFixed(2)} Hz
             </GridNoteText>
