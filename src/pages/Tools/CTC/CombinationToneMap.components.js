@@ -25,7 +25,7 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, h
         <StyledCTControls>
             <h1>Combination Tone Grid</h1>
                 <Label><div>Left: {leftMIDI} {midiToNote(leftMIDI)} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <NoteSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftSlider"/></Label>
-                <Label><div>Right: {rightMIDI} {midiToNote(rightMIDI)} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div><NoteSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightSlider"/></Label>
+                <Label><div>Right: {rightMIDI} {midiToNote(rightMIDI)} {midiToFrequency(rightMIDI).toFixed(2)} Hz</div><NoteSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightSlider"/></Label>
                 <Label>Grid Size: {gridSize} <GridSizeSlider type="range" min="1" max="16" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </Label>
         </StyledCTControls>
     )
@@ -35,9 +35,8 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right}) => {
 
     return (
         <StyledGridNote leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}>
-            <GridNoteText>
+            <GridNoteText gridSize={gridSize}>
                 { (left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI)).toFixed(2)} Hz
-                { midiToNote((left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI)).toFixed(2))}
             </GridNoteText>
         </StyledGridNote>
     )

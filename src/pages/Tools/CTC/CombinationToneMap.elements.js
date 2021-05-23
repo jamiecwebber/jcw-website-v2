@@ -73,14 +73,36 @@ export const StyledGridNote = styled.div`
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};
 
-    &:hover {
-            background-color: Thistle;
-            transition: all 0.3s ease;
+    > * {
+        display: ${({gridSize}) => ((gridSize > 8 ) ? "none" : "inherit" )}; 
+        color: red;
+
+        &:hover {
+            color: blue;
         }
+    }
+
+    &:hover {
+        background-color: Thistle;
+        transition: all 0.3s ease;
+        > * {
+            color: green;
+            display: inherit;
+        }
+
+        
+    }
 `
 
 export const GridNoteText = styled.div`
     margin-top: 15px;
     rotate: -45deg;
+/*     
+    display: ${({gridSize}) => ((gridSize > 8 ) ? "none" : "visible" )};  */
+/* 
+    &:hover {
+        display: visible;
+        color: blue;
+    } */
 `
 
