@@ -64,40 +64,73 @@ export const GridColumn = styled.div`
     grid-auto-flow: row;
 `
 
+export const ZeroGridNote = styled.div`
+    margin: 2px;
+    background-color: transparent;
+    rotate: -180deg;
+    width: ${({gridSize}) => ((55/gridSize) + "vh")};
+    height: ${({gridSize}) => ((55/gridSize) + "vh")};
+`
+
+
 export const StyledGridNote = styled.div`
     border: 1px solid gray;
     border-radius: 3px;
     margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: lightpink;
     rotate: -180deg;
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};
     
-    > * {
-        display: ${({ left, right, gridSize }) => ( ( left === 0 && right === 0 ) ? "none" : ( (gridSize > 8 ) ? "none" : "inherit" ) ) }; 
+    /* > h3 {
+        display: ${({ left, right, gridSize }) => ( ( (gridSize > 8 ) ? "none" : "inherit" ) ) }; 
         color: red;
 
         &:hover {
             color: blue;
         }
-    }
+    } */
 
     &:hover {
         background-color: Thistle;
         transition: all 0.3s ease;
         > * {
             color: green;
-            display: ${({ left, right }) => ( ( left === 0 && right === 0 ) ? "none" :  "inherit" ) }; 
+            /* display: ${({ left, right }) => ( ( left === 0 && right === 0 ) ? "none" :  "inherit" ) };  */
         }
     }
 `
 
-export const GridNoteText = styled.div`
-    margin-top: 15px;
+export const GridNoteMain = styled.div`
     rotate: -45deg;
+    width: 75%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction:row;
 
     &:hover {
         color: blue;
     }
 `
 
+export const GridNoteName = styled.h1`
+    font-size: ${({gridSize}) => ((25/gridSize) + "vh") } ;
+    display: flex;
+    align-items: center;
+`
+
+export const GridNoteCentsAndOctave = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: ${({gridSize}) => ((15/gridSize) + "vh") } ;
+`
+
+// export const GridNoteCents = styled.div`
+// `
+
+// export const GridNoteOctave = styled.div`
+// `
