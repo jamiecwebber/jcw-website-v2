@@ -79,11 +79,12 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right}) => {
 
     // calculate frequency, note, cents, and octave
     let frequency = (left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI));
-    let { midi, cents } = calculateNote(frequencyToMidicents(frequency));
+    let midicents = frequencyToMidicents(frequency)
+    let { midi, cents } = calculateNote(midicents);
     let { noteName, octave, note } = midiToNote(midi);
 
     return (
-        <StyledGridNote gridSize={gridSize} note={note} octave={octave}>
+        <StyledGridNote gridSize={gridSize} noteWithCents={(note * 100) + cents} octave={octave}>
             <GridNoteInfo  octave={octave} noteName={noteName} cents={cents} gridSize={gridSize}/>
         </StyledGridNote>
     )
