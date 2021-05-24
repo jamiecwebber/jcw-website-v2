@@ -80,7 +80,7 @@ export const StyledGridNote = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: lightpink;
+    background-color: ${({ note, octave }) => ("hsl(" + ((note/12 * 360)) + ", 80%, " + ((octave * 5 ) + 40) + "%)") };
     rotate: -180deg;
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};

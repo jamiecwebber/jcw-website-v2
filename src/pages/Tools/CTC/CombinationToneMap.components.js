@@ -6,9 +6,10 @@ import { useEffect, useRef } from 'react';
 const midiToNote = (midi) => {
     let octave = Math.floor(midi/12) - 1;
     
+    let note = midi % 12;
     let notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    let note = notes[midi % 12];
-    return  { note, octave };
+    let noteName = notes[note];
+    return  { noteName, octave, note };
 }
 
 let midiToFrequency = (midi) => {
@@ -36,8 +37,8 @@ let calculateNote = (midicents) => {
 
 export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, handleRightChange, handleGridChange } ) => {
 
-    let { note : leftNote, octave: leftOctave } = midiToNote(leftMIDI);
-    let { note: rightNote, octave: rightOctave } = midiToNote(rightMIDI);
+    let { noteName : leftNote, octave: leftOctave } = midiToNote(leftMIDI);
+    let { noteName : rightNote, octave: rightOctave } = midiToNote(rightMIDI);
 
     return (
         <StyledCTControls>
@@ -49,15 +50,14 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, h
     )
 }
 
-const GridNoteInfo = ({ midi, cents, gridSize }) => {
+const GridNoteInfo = ({ noteName, octave, cents, gridSize }) => {
 
-    let { note, octave } = midiToNote(midi);
 
     return (
         <>
             <GridNoteMain> 
                 <GridNoteName gridSize={gridSize}>
-                    { note }
+                    { noteName }
                 </GridNoteName>
                 <GridNoteCentsAndOctave gridSize={gridSize}>
                     <div>{ cents }</div>
@@ -80,11 +80,11 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right}) => {
     // calculate frequency, note, cents, and octave
     let frequency = (left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI));
     let { midi, cents } = calculateNote(frequencyToMidicents(frequency));
-
+    let { noteName, octave, note } = midiToNote(midi);
 
     return (
-        <StyledGridNote gridSize={gridSize} >
-            <GridNoteInfo  midi={midi} cents={cents} gridSize={gridSize}/>
+        <StyledGridNote gridSize={gridSize} note={note} octave={octave}>
+            <GridNoteInfo  octave={octave} noteName={noteName} cents={cents} gridSize={gridSize}/>
         </StyledGridNote>
     )
 }
