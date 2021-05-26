@@ -95,12 +95,9 @@ export const StyledGridNote = styled.div`
     } */
 
     &:hover {
-        background-color: Thistle;
+        background-color: ${({ noteWithCents, octave }) => ("hsl(" + ((noteWithCents/1200 * 360)) + ", 90%, " + ((octave * 5 ) + 60) + "%)") };
         transition: all 0.3s ease;
-        > * {
-            color: green;
-            /* display: ${({ left, right }) => ( ( left === 0 && right === 0 ) ? "none" :  "inherit" ) };  */
-        }
+        
     }
 `
 

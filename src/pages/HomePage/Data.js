@@ -1,8 +1,8 @@
 export const homeObjOne = {
     background: '#eeffee', 
-    img: require('../../images/greybackground.jpg').default,
-    heading: "microtonal music",
-    comment: "spectral combination tone calculator"
+    img: require('../../images/homepagebackground.jpg').default,
+    heading: "Welcome to my webpage",
+    comment: "Thank you for stopping by!"
 };
 
 export const homeObjTwo = {
