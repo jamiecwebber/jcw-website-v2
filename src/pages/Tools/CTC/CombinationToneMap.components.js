@@ -1,4 +1,4 @@
-import { StyledCTGrid, GridColumn, ZeroGridNote, StyledGridNote, GridNoteMain, GridNoteName, GridNoteCentsAndOctave, StyledCTControls, ControlContainer, ShortSlider, LongSlider } from './CombinationToneMap.styles'
+import { StyledCTGrid, GridColumn, ZeroGridNote, StyledGridNote, GridNoteMain, GridNoteName, GridNoteCentsAndOctave, StyledCTControls, StyledCTSynth, ControlContainer, ShortSlider, LongSlider, StyledCheckbox } from './CombinationToneMap.styles'
 import { useEffect, useRef } from 'react';
 import { midiToFrequency, midiToNote, frequencyToMidicents, splitMidicents} from '../../../globalFunctions'
 
@@ -20,6 +20,19 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, h
     )
 }
 
+export const CTSynthControls = ( { leftMIDI, rightMIDI, playOnHover, togglePlayOnHover, sustainOnClick, toggleSustainOnClick, synthVolume, handleVolumeChange } ) => {
+    
+    return (
+        <StyledCTSynth >
+            <h1>Synth Controls</h1>
+            <ControlContainer>Play on hover: <StyledCheckbox type="checkbox" onChange={togglePlayOnHover} checked={playOnHover} /></ControlContainer>
+            <ControlContainer>Sustain on click: <StyledCheckbox type="checkbox" onChange={toggleSustainOnClick} checked={sustainOnClick} /></ControlContainer>
+            <ControlContainer>Volume: <ShortSlider type="range" min="0" max="1" step="0.01" value={synthVolume} class="slider" onChange={handleVolumeChange}  /></ControlContainer>
+        </StyledCTSynth>
+    )
+}
+
+
 const GridNoteInfo = ({ noteName, octave, cents, gridSize }) => {
 
     return (
@@ -29,7 +42,7 @@ const GridNoteInfo = ({ noteName, octave, cents, gridSize }) => {
                     { noteName }
                 </GridNoteName>
                 <GridNoteCentsAndOctave gridSize={gridSize}>
-                    <div>{ cents }</div>
+                    <div>{ (cents > 0 ? "+" + cents : cents) }</div>
                     <div>{ octave }</div>
                 </GridNoteCentsAndOctave>
             </GridNoteMain>

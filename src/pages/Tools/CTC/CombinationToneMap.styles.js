@@ -66,10 +66,6 @@ export const StyledCTSynth = styled.div`
     padding: 20px;
 `
 
-
-
-
-
 export const StyledCTGrid = styled.div`
     display: grid;
     grid-auto-flow: column;
@@ -99,13 +95,13 @@ export const StyledGridNote = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${({ colour, octave }) => (colour + (0.6 - (octave * 0.05 ))) + ")"};
+    background-color: ${({ colour, octave }) => (colour + (0.8 - (octave * 0.07 ))) + ")"};
     rotate: -180deg;
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};
     
     &:hover {
-        background-color: ${({ colour, octave }) => (colour + (0.9 - (octave * 0.025 ))) + ")"};;
+        background-color: ${({ colour, octave }) => (colour + (0.95 - (octave * 0.05 ))) + ")"};;
         transition: all 0.2s ease;
         cursor: pointer;
     }
