@@ -1,37 +1,7 @@
-import { StyledCTGrid, GridColumn, ZeroGridNote, StyledGridNote, GridNoteMain, GridNoteName, GridNoteCentsAndOctave, StyledCTControls, Label, NoteSlider, GridSizeSlider } from './CombinationToneMap.elements'
+import { StyledCTGrid, GridColumn, ZeroGridNote, StyledGridNote, GridNoteMain, GridNoteName, GridNoteCentsAndOctave, StyledCTControls, Label, NoteSlider, GridSizeSlider } from './CombinationToneMap.styles'
 import { useEffect, useRef } from 'react';
+import { midiToFrequency, midiToNote, frequencyToMidicents, splitMidicents} from '../../../globalFunctions'
 
-
-// Some helper functions
-const midiToNote = (midi) => {
-    let octave = Math.floor(midi/12) - 1;
-    
-    let note = midi % 12;
-    let notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    let noteName = notes[note];
-    return  { noteName, octave, note };
-}
-
-let midiToFrequency = (midi) => {
-    return Math.pow(2,((midi-69)/12)) * 440;
-}
-  
-let frequencyToMidicents = (frequency) => {
-    // this calculation assumes A4 = 440Hz = 6900 MIDIcents
-    // https://newt.phys.unsw.edu.au/jw/notes.html
-    let midicents = Math.round(6900 + 1200 * Math.log(frequency/440) / Math.log(2));
-    return midicents;
-} 
-
-let calculateNote = (midicents) => {
-    let cents = midicents % 100;
-    let midi = (midicents - cents) / 100 ;
-
-    return {
-        midi,
-        cents
-    };
-}
 
 // components
 
@@ -80,11 +50,25 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right}) => {
     // calculate frequency, note, cents, and octave
     let frequency = (left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI));
     let midicents = frequencyToMidicents(frequency)
-    let { midi, cents } = calculateNote(midicents);
+    let { midi, cents } = splitMidicents(midicents);
     let { noteName, octave, note } = midiToNote(midi);
 
+    // calcultate RGBA value for note (this is here rather than in styles for efficiency)
+    // RGBA max is (255, 255, 255, 1)
+    let max = 255;
+    let hue = ((note * 100) + cents)/400; // gives value between 0 and 3 to 3 decimal points
+    // 0 and 3 should be max red, 1 max green, 2 max blue. If they all ramp up and down over 0.33, that makes: 
+    let calculateColour = ( intensity ) => {
+        intensity = intensity > 2 ? Math.abs( ( 3 - intensity ) ) : Math.abs(intensity); // shifts the red values between 2 and 3 to 1 and 0.
+        return ( intensity > 1 ) ? ( 0 ) : ( intensity * max );
+    }
+    // transparency is calculated on the styled components side based on octave
+    let colour = "rgba(" + calculateColour(hue) + ", " + calculateColour(hue - 1) + ", " + calculateColour(hue - 2) + ", "; 
+
+    // "hsl(" + ((noteWithCents/1200 * 360)) + ", 80%, " + ((octave * 5 ) + 40) + "%)"
+
     return (
-        <StyledGridNote gridSize={gridSize} noteWithCents={(note * 100) + cents} octave={octave}>
+        <StyledGridNote gridSize={gridSize} colour={colour} octave={octave}>
             <GridNoteInfo  octave={octave} noteName={noteName} cents={cents} gridSize={gridSize}/>
         </StyledGridNote>
     )

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { CTContainer } from './CombinationToneMap.elements'
+import { CTContainer } from './CombinationToneMap.styles'
 import { CTGrid, CTControls } from './CombinationToneMap.components'
 
 

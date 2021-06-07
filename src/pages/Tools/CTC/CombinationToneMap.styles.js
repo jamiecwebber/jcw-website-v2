@@ -18,8 +18,6 @@ export const CTContainer = styled(Container)`
     }
 `
 
-
-
 export const StyledCTControls = styled.div`
     width: 33%;
     height: 25%;
@@ -80,7 +78,7 @@ export const StyledGridNote = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${({ noteWithCents, octave }) => ("hsl(" + ((noteWithCents/1200 * 360)) + ", 80%, " + ((octave * 5 ) + 40) + "%)") };
+    background-color: ${({ colour, octave }) => (colour + (1 - ((octave * 0.05 ) + 0.30))) + ")"};
     rotate: -180deg;
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};
@@ -95,7 +93,7 @@ export const StyledGridNote = styled.div`
     } */
 
     &:hover {
-        background-color: ${({ noteWithCents, octave }) => ("hsl(" + ((noteWithCents/1200 * 360)) + ", 90%, " + ((octave * 5 ) + 60) + "%)") };
+        background-color: ${({ colour, octave }) => (colour + (1 - ((octave * 0.05 ) + 0.40))) + ")"};;
         transition: all 0.3s ease;
         
     }
