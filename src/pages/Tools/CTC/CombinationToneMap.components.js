@@ -1,4 +1,4 @@
-import { StyledCTGrid, GridColumn, ZeroGridNote, StyledGridNote, GridNoteMain, GridNoteName, GridNoteCentsAndOctave, StyledCTControls, Label, NoteSlider, GridSizeSlider } from './CombinationToneMap.styles'
+import { StyledCTGrid, GridColumn, ZeroGridNote, StyledGridNote, GridNoteMain, GridNoteName, GridNoteCentsAndOctave, StyledCTControls, ControlContainer, ShortSlider, LongSlider } from './CombinationToneMap.styles'
 import { useEffect, useRef } from 'react';
 import { midiToFrequency, midiToNote, frequencyToMidicents, splitMidicents} from '../../../globalFunctions'
 
@@ -13,15 +13,14 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, h
     return (
         <StyledCTControls>
             <h1>Combination Tone Grid</h1>
-                <Label><div>Left: {leftMIDI} {leftNote} {leftOctave} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <NoteSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftSlider"/></Label>
-                <Label><div>Right: {rightMIDI} {rightNote} { rightOctave } {midiToFrequency(rightMIDI).toFixed(2)} Hz</div><NoteSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightSlider"/></Label>
-                <Label>Grid Size: {gridSize} <GridSizeSlider type="range" min="1" max="16" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </Label>
+                <ControlContainer><div>Left: {leftMIDI} {leftNote} {leftOctave} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <ShortSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftSlider"/></ControlContainer>
+                <ControlContainer><div>Right: {rightMIDI} {rightNote} { rightOctave } {midiToFrequency(rightMIDI).toFixed(2)} Hz</div><ShortSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightSlider"/></ControlContainer>
+                <ControlContainer>Grid Size: {gridSize} <LongSlider type="range" min="1" max="16" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </ControlContainer>
         </StyledCTControls>
     )
 }
 
 const GridNoteInfo = ({ noteName, octave, cents, gridSize }) => {
-
 
     return (
         <>
@@ -68,6 +67,7 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right}) => {
     // RGBA max is (255, 255, 255, 1)
     let max = 255;
     let hue = ((note * 100) + cents)/1200; // gives value between 0 and 3 to 3 decimal points
+    if ( hue < 0 ) { hue = hue + 1 };
     let calculateColour = ( intensity ) => {
         return (0.25 - Math.pow(intensity, 2)) * 4 * max;
     }
@@ -106,3 +106,4 @@ export const CTGrid = ( { leftMIDI, rightMIDI, gridSize } ) => {
         </StyledCTGrid>
     )
 }
+

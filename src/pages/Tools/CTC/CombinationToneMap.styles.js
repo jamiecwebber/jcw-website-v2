@@ -18,33 +18,55 @@ export const CTContainer = styled(Container)`
     }
 `
 
-export const StyledCTControls = styled.div`
-    width: 33%;
-    height: 25%;
+export const StyledControlsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     margin-top: 7vh;
     margin-right: 3vh;
+`
 
+export const StyledCTControls = styled.div`
     border: 8px solid limegreen;
     border-radius: 15px;
     background-color: mediumpurple;
-
     padding: 20px;
 `
 
-export const Label = styled.div`
+export const ControlContainer = styled.div`
     width: 95%;
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
 `
 
-export const NoteSlider = styled.input`
+export const ShortSlider = styled.input`
     width: 50%;
 `
 
-export const GridSizeSlider = styled.input`
+export const LongSlider = styled.input`
     width: 70%;
 `
+
+export const StyledCheckbox = styled.input`
+
+`
+
+
+export const StyledCTSynth = styled.div`
+    width: 60%;
+    /* height: 30%; */
+    margin-top: 7vh;
+    margin-right: 3vh;
+
+    border: 8px solid lawngreen;
+    border-radius: 15px;
+    background-color: cyan;
+
+    padding: 20px;
+`
+
+
 
 
 
@@ -53,7 +75,7 @@ export const StyledCTGrid = styled.div`
     grid-auto-flow: column;
     width: 55vh;
     height: 55vh;
-    margin-top: 20vh;
+    margin-top: 23vh;
     margin-right: 15vh;
     rotate: -135deg;
 `
@@ -63,18 +85,17 @@ export const GridColumn = styled.div`
 `
 
 export const ZeroGridNote = styled.div`
-    margin: 2px;
+    margin: 1px;
     background-color: transparent;
     rotate: -180deg;
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};
 `
 
-
 export const StyledGridNote = styled.div`
     border: ${({colourToneRight, colourToneLeft }) => ( colourToneRight ? "3px solid aqua" : colourToneLeft ? "3px solid deeppink" : "1px solid gray")};
     border-radius: "3px";
-    margin: 2px;
+    margin: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,19 +104,10 @@ export const StyledGridNote = styled.div`
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};
     
-    /* > h3 {
-        display: ${({ left, right, gridSize }) => ( ( (gridSize > 8 ) ? "none" : "inherit" ) ) }; 
-        color: red;
-
-        &:hover {
-            color: blue;
-        }
-    } */
-
     &:hover {
         background-color: ${({ colour, octave }) => (colour + (0.9 - (octave * 0.025 ))) + ")"};;
         transition: all 0.2s ease;
-        
+        cursor: pointer;
     }
 `
 
@@ -123,9 +135,3 @@ export const GridNoteCentsAndOctave = styled.div`
     align-items: center;
     font-size: ${({gridSize}) => ((15/gridSize) + "vh") } ;
 `
-
-// export const GridNoteCents = styled.div`
-// `
-
-// export const GridNoteOctave = styled.div`
-// `

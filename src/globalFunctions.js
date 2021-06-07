@@ -2,7 +2,7 @@
 export const midiToNote = (midi) => {
     let octave = Math.floor(midi/12) - 1;
     let note = midi % 12;
-    let notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    let notes = ['C', 'C#', 'D', 'E♭', 'E', 'F', 'F#', 'G', 'A♭', 'A', 'B♭', 'B'];
     let noteName = notes[note];
     return  { noteName, octave, note };
 }
@@ -21,6 +21,11 @@ export const frequencyToMidicents = (frequency) => {
 export const splitMidicents = (midicents) => {
     let cents = midicents % 100;
     let midi = (midicents - cents) / 100 ;
+
+    if ( cents > 50 ) {
+        cents -= 100;
+        midi += 1;
+    }
 
     return {
         midi,

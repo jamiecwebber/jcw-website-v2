@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
-import { CTContainer } from './CombinationToneMap.styles'
-import { CTGrid, CTControls } from './CombinationToneMap.components'
+import { CTContainer, StyledControlsContainer } from './CombinationToneMap.styles'
+import { CTGrid, CTControls} from './CombinationToneMap.components'
+import { CTSynth } from './CombinationToneMap.synth'
  
 const CTMap = (
 ) => {
@@ -24,10 +25,14 @@ const CTMap = (
 
     return (
         <CTContainer>
-            <CTControls 
-                leftMIDI={leftMIDI} handleLeftChange={handleLeftChange}
-                rightMIDI={rightMIDI} handleRightChange={handleRightChange}
-                gridSize={gridSize} handleGridChange={handleGridChange}></CTControls>
+            <StyledControlsContainer>
+                <CTControls 
+                    leftMIDI={leftMIDI} handleLeftChange={handleLeftChange}
+                    rightMIDI={rightMIDI} handleRightChange={handleRightChange}
+                    gridSize={gridSize} handleGridChange={handleGridChange} />
+                   
+                <CTSynth leftMIDI={leftMIDI} rightMIDI={rightMIDI} />
+            </StyledControlsContainer>
             <CTGrid leftMIDI={leftMIDI} rightMIDI={rightMIDI} gridSize={gridSize}></CTGrid>
         </CTContainer>
     )
