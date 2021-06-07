@@ -72,13 +72,13 @@ export const ZeroGridNote = styled.div`
 
 
 export const StyledGridNote = styled.div`
-    border: 1px solid gray;
-    border-radius: 3px;
+    border: ${({colourToneRight, colourToneLeft }) => ( colourToneRight ? "3px solid aqua" : colourToneLeft ? "3px solid deeppink" : "1px solid gray")};
+    border-radius: "3px";
     margin: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${({ colour, octave }) => (colour + (1 - ((octave * 0.05 ) + 0.30))) + ")"};
+    background-color: ${({ colour, octave }) => (colour + (0.6 - (octave * 0.05 ))) + ")"};
     rotate: -180deg;
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};
@@ -93,8 +93,8 @@ export const StyledGridNote = styled.div`
     } */
 
     &:hover {
-        background-color: ${({ colour, octave }) => (colour + (1 - ((octave * 0.05 ) + 0.40))) + ")"};;
-        transition: all 0.3s ease;
+        background-color: ${({ colour, octave }) => (colour + (0.9 - (octave * 0.025 ))) + ")"};;
+        transition: all 0.2s ease;
         
     }
 `

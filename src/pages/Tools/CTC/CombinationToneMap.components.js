@@ -53,22 +53,33 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right}) => {
     let { midi, cents } = splitMidicents(midicents);
     let { noteName, octave, note } = midiToNote(midi);
 
-    // calcultate RGBA value for note (this is here rather than in styles for efficiency)
+    // determine whether this note is part of a fibonacci-like series
+    // could be edited to take into account gridSize and not have to use an array
+    let colourToneLeft = false;
+    let colourToneRight = false;
+    let fibSeries = [1,1,2,3,5,8,13,21];
+    for (let i = 0; i < 7; i++) { 
+        if ( fibSeries[i] === right && fibSeries[i - 1] === left ) { colourToneRight = true; }
+        else if ( fibSeries[i] === left && fibSeries[i - 1] === right ) { colourToneLeft = true; };
+    }
+
+    // this calcultates RGBA value for note (this is here rather than in styles for efficiency)
+    // transparency is calculated on the styled components side based on octave
     // RGBA max is (255, 255, 255, 1)
     let max = 255;
-    let hue = ((note * 100) + cents)/400; // gives value between 0 and 3 to 3 decimal points
-    // 0 and 3 should be max red, 1 max green, 2 max blue. If they all ramp up and down over 0.33, that makes: 
+    let hue = ((note * 100) + cents)/1200; // gives value between 0 and 3 to 3 decimal points
     let calculateColour = ( intensity ) => {
-        intensity = intensity > 2 ? Math.abs( ( 3 - intensity ) ) : Math.abs(intensity); // shifts the red values between 2 and 3 to 1 and 0.
-        return ( intensity > 1 ) ? ( 0 ) : ( intensity * max );
+        return (0.25 - Math.pow(intensity, 2)) * 4 * max;
     }
-    // transparency is calculated on the styled components side based on octave
-    let colour = "rgba(" + calculateColour(hue) + ", " + calculateColour(hue - 1) + ", " + calculateColour(hue - 2) + ", "; 
 
-    // "hsl(" + ((noteWithCents/1200 * 360)) + ", 80%, " + ((octave * 5 ) + 40) + "%)"
+    // this centers the hue values around (-0.5, 0.5) to use the above calculation
+    let colour = "rgba(" + 
+        calculateColour((hue > 0.5) ? hue - 1 : hue) + ", " + 
+        calculateColour((hue - 0.333) > 0.5 ? hue - 1.333 : hue - 0.333) + ", " + 
+        calculateColour((hue - 0.666) < -0.5 ? hue + 0.333 : hue - 0.666) + ", "; 
 
     return (
-        <StyledGridNote gridSize={gridSize} colour={colour} octave={octave}>
+        <StyledGridNote gridSize={gridSize} colour={colour} octave={octave} colourToneLeft={colourToneLeft} colourToneRight={colourToneRight}>
             <GridNoteInfo  octave={octave} noteName={noteName} cents={cents} gridSize={gridSize}/>
         </StyledGridNote>
     )
