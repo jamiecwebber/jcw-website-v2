@@ -4,10 +4,6 @@ import { CTGrid, CTControls, CTSynthControls } from './CombinationToneMap.compon
  
 const CTMap = (
 ) => {
-    // Audio Context
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audioContext = new AudioContext();
-
     // Grid controls
     const [leftMIDI, setLeftMIDI] = useState(40);
     const [rightMIDI, setRightMIDI] = useState(47);
@@ -28,7 +24,6 @@ const CTMap = (
 
     let togglePlayOnHover = () => {setPlayOnHover(!playOnHover)};
     let toggleSustainOnClick = () => { setSustainOnClick(!sustainOnClick) };
-    let handleVolumeChange = (event) => { setSynthVolume(event.target.value) };
 
     let handleGridClick = ({i,j}) => {
         console.log(i);
@@ -42,6 +37,19 @@ const CTMap = (
             newGrid[i][j] = !newGrid[i][j]
             setSustainGrid(newGrid);
         }
+    };
+
+    // Audio Context
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioContext = new AudioContext();
+    
+    const mainGainNode = new audioContext.createGain();
+    mainGainNode.connect(audioContext.destination);
+    mainGainNode.value(synthVolume)
+
+    let handleVolumeChange = (event) => { 
+        setSynthVolume(event.target.value);
+        mainGainNode.value(synthVolume); 
     };
 
     return (
@@ -64,7 +72,8 @@ const CTMap = (
                 playOnHover={playOnHover}
                 sustainOnClick={sustainOnClick}
                 handleGridClick={handleGridClick}
-                audioContext={audioContext}/>
+                audioContext={audioContext}
+                mainGainNode={mainGainNode}/>
         </CTContainer>
     )
 }

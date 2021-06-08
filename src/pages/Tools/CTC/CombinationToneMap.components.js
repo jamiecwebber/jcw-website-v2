@@ -54,27 +54,56 @@ const GridNoteInfo = ({ noteName, octave, cents, gridSize, sustain }) => {
     )
 }
 
-const GridNoteSynth = ({audioContext, frequency, click, sustain, hover}) => {
+const GridNoteSynth = ({audioContext, mainGainNode, frequency, hover, click, sustain }) => {
+
+    // create three new synths and connect them to the audioContext's mainGainNode
+    let hoverOsc = audioContext.createOscillator();
+    hoverOsc.connect(mainGainNode);
+    hoverOsc.type="triangle";
+    hoverOsc.frequency.value = frequency;
+
+    let clickOsc = audioContext.createOscillator();
+    clickOsc.connect(mainGainNode);
+    clickOsc.type="saw";
+    clickOsc.frequency.value = frequency;
+
+    let sustainOsc = audioContext.createOscillator();
+    sustainOsc.connect(mainGainNode);
+    sustainOsc.type="sine";
+    sustainOsc.frequency.value = frequency;
 
     // handle hover
-    useEffect(()=>{
-
-        return (()=>{}) // cleanup function
-    })
+    useEffect((hoverOsc)=>{
+        console.log("hover effect");
+        return (()=>{ // cleanup function
+            hoverOsc.disconnect();
+        }) 
+    }, [hover])
 
     // handle click
+    useEffect((clickOsc)=>{ // cleanup function
+        console.log("click effect");
+        
+        return (()=>{
+            clickOsc.disconnect();
+        }) 
+    }, [click])
 
-
-    
     // handle sustain
+    useEffect((sustainOsc)=>{
+        console.log("sustain effect");
 
+        return (()=>{ // cleanup function
+            sustainOsc.disconnect();
+        }) 
+    }, [sustain])
 
     return (
         <></>
     )
 }
 
-const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sustainOnClick, sustainFromGrid, handleGridClick, audioContext}) => {
+const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sustainOnClick, sustainFromGrid, handleGridClick, audioContext, mainGainNode}) => {
 
     // set up local state for sustain
     let [ sustain, setSustain ] = useState(sustainFromGrid);
@@ -143,12 +172,12 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sust
     return (
         <StyledGridNote onClick={handleGridNoteClick} onMouseEnter={handleGridNoteHover} onMouseLeave={handleGridNoteHoverOff} gridSize={gridSize} colour={colour} octave={octave} colourToneLeft={colourToneLeft} colourToneRight={colourToneRight}>
             <GridNoteInfo  octave={octave} noteName={noteName} cents={cents} gridSize={gridSize} sustain={sustain}/>
-            <GridNoteSynth audioContext={audioContext} frequency={frequency} click={click} hover={hover} sustain={sustain}/>
+            <GridNoteSynth audioContext={audioContext} mainGainNode={mainGainNode} frequency={frequency} click={click} hover={hover} sustain={sustain}/>
         </StyledGridNote>
     )
 }
 
-export const CTGrid = ( { leftMIDI, rightMIDI, gridSize, playOnHover, sustainOnClick, sustainGrid, handleGridClick, audioContext } ) => {
+export const CTGrid = ( { leftMIDI, rightMIDI, gridSize, playOnHover, sustainOnClick, sustainGrid, handleGridClick, audioContext, mainGainNode } ) => {
 
 
 
@@ -173,7 +202,8 @@ export const CTGrid = ( { leftMIDI, rightMIDI, gridSize, playOnHover, sustainOnC
                                         sustainOnClick={sustainOnClick}
                                         handleGridClick={handleGridClick}
                                         sustainFromGrid={sustainGrid[i][j]}
-                                        audioContext={audioContext}/>
+                                        audioContext={audioContext}
+                                        mainGainNode={mainGainNode}/>
                                     )
                                 })
                             }
