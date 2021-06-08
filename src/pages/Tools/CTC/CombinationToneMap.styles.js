@@ -109,25 +109,33 @@ export const StyledGridNote = styled.div`
 
 export const GridNoteMain = styled.div`
     rotate: -45deg;
-    width: 75%;
+    width: 95%;
+    height: 95%;
+    padding: 10%;
     display: flex;
     justify-content: space-around;
     flex-direction:row;
-
-    &:hover {
-        color: blue;
-    }
+    color: ${({sustain}) => (sustain ? "lawngreen" : "default")};
+    border: ${({sustain}) => (sustain ? "2px solid darkgreen" : "default")};
+    background-color: ${({sustain}) => (sustain ? "green" : "default")};
+    border-radius: 50%;
 `
 
 export const GridNoteName = styled.h1`
     font-size: ${({gridSize}) => ((25/gridSize) + "vh") } ;
+    color: inherit;
     display: flex;
     align-items: center;
 `
 
 export const GridNoteCentsAndOctave = styled.div`
     display: flex;
+    color: inherit;
     flex-direction: column;
     align-items: center;
     font-size: ${({gridSize}) => ((15/gridSize) + "vh") } ;
+`
+
+export const GridNoteCentsAndOctaveDiv = styled.div`
+    color: inherit;
 `
