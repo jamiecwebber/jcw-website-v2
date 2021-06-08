@@ -43,9 +43,9 @@ const CTMap = (
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     const audioContext = new AudioContext();
     
-    const mainGainNode = new audioContext.createGain();
+    const mainGainNode = audioContext.createGain();
     mainGainNode.connect(audioContext.destination);
-    mainGainNode.value(synthVolume)
+    mainGainNode.gain.value = synthVolume;
 
     let handleVolumeChange = (event) => { 
         setSynthVolume(event.target.value);

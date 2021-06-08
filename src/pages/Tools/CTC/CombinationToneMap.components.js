@@ -56,47 +56,64 @@ const GridNoteInfo = ({ noteName, octave, cents, gridSize, sustain }) => {
 
 const GridNoteSynth = ({audioContext, mainGainNode, frequency, hover, click, sustain }) => {
 
+    const [hovering, setHovering] = useState(hover);
+
     // create three new synths and connect them to the audioContext's mainGainNode
-    let hoverOsc = audioContext.createOscillator();
-    hoverOsc.connect(mainGainNode);
-    hoverOsc.type="triangle";
-    hoverOsc.frequency.value = frequency;
+    const hoverOsc = useRef(audioContext.createOscillator())
+    hoverOsc.current.connect(mainGainNode);
+    hoverOsc.current.type="triangle";
+    hoverOsc.current.frequency.value = frequency;
 
-    let clickOsc = audioContext.createOscillator();
-    clickOsc.connect(mainGainNode);
-    clickOsc.type="saw";
-    clickOsc.frequency.value = frequency;
+    const clickOsc = useRef(audioContext.createOscillator());
+    clickOsc.current.connect(mainGainNode);
+    clickOsc.current.type="saw";
+    clickOsc.current.frequency.value = frequency;
 
-    let sustainOsc = audioContext.createOscillator();
-    sustainOsc.connect(mainGainNode);
-    sustainOsc.type="sine";
-    sustainOsc.frequency.value = frequency;
+    // const sustainOsc = audioContext.createOscillator();
+    // sustainOsc.current.connect(mainGainNode);
+    // sustainOsc.current.type="sine";
+    // sustainOsc.current.frequency.value = frequency;
 
     // handle hover
-    useEffect((hoverOsc)=>{
-        console.log("hover effect");
-        return (()=>{ // cleanup function
-            hoverOsc.disconnect();
-        }) 
-    }, [hover])
+    useEffect(()=>{
+        if (hover) {
+            if (!hovering) {
+                hoverOsc.current.start();
+                setHovering(true);
+            }
+        }
+        if (hovering & !hover) {
+            hoverOsc.current.stop();
+            hoverOsc.current.disconnect();
+            setHovering(false);
+            hoverOsc.current = audioContext.createOscillator();
+            hoverOsc.current.type="triangle";
+            hoverOsc.current.frequency.value = frequency;
+        }
+        // } else {
+        //     hoverOsc.stop();
+        // }
+        // return (( hoverOsc )=>{ // cleanup function
+        //     hoverOsc.current.stop();
+        // }) 
+    }, [hover]);
 
     // handle click
-    useEffect((clickOsc)=>{ // cleanup function
+    useEffect(()=>{ // cleanup function
         console.log("click effect");
+        clickOsc.current.start();
+        clickOsc.current.stop(audioContext.currentTime + 0.5);
         
-        return (()=>{
-            clickOsc.disconnect();
-        }) 
     }, [click])
 
-    // handle sustain
-    useEffect((sustainOsc)=>{
-        console.log("sustain effect");
+    // // handle sustain
+    // useEffect((sustainOsc)=>{
+    //     console.log("sustain effect");
 
-        return (()=>{ // cleanup function
-            sustainOsc.disconnect();
-        }) 
-    }, [sustain])
+    //     return ((sustainOsc)=>{ // cleanup function
+    //         sustainOsc.disconnect();
+    //     }) 
+    // }, [sustain])
 
     return (
         <></>
