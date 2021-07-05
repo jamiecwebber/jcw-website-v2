@@ -61,7 +61,7 @@ const GridNoteSynth = ({audioContext, mainGainNode, frequency, hover, click, sus
     // create three new synths and connect them to the audioContext's mainGainNode
     const hoverOsc = useRef(audioContext.createOscillator())
     hoverOsc.current.connect(mainGainNode);
-    hoverOsc.current.type="triangle";
+    hoverOsc.current.type="sine";
     hoverOsc.current.frequency.value = frequency;
 
     const clickOsc = useRef(audioContext.createOscillator());
@@ -99,12 +99,12 @@ const GridNoteSynth = ({audioContext, mainGainNode, frequency, hover, click, sus
     }, [hover]);
 
     // handle click
-    useEffect(()=>{ // cleanup function
-        console.log("click effect");
-        clickOsc.current.start();
-        clickOsc.current.stop(audioContext.currentTime + 0.5);
+    // useEffect(()=>{ 
+    //     console.log("click effect");
+    //     clickOsc.current.start();
+    //     clickOsc.current.stop(audioContext.currentTime + 0.5);
         
-    }, [click])
+    // }, [click])
 
     // // handle sustain
     // useEffect((sustainOsc)=>{

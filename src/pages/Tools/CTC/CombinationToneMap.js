@@ -1,13 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { CTContainer, StyledControlsContainer } from './CombinationToneMap.styles'
 import { CTGrid, CTControls, CTSynthControls } from './CombinationToneMap.components'
+import { AudioReactContext } from '../../../App.js'
  
 const CTMap = (
 ) => {
     // Grid controls
     const [leftMIDI, setLeftMIDI] = useState(40);
     const [rightMIDI, setRightMIDI] = useState(47);
-    const [gridSize, setGridSize] = useState(8);
+    const [gridSize, setGridSize] = useState(9);
     const [sustainGrid, setSustainGrid] = useState([...Array(16)].map(x=>Array(16).fill(false))); 
 
     const handleLeftChange = (event) => { setLeftMIDI(event.target.value);}
@@ -40,8 +41,7 @@ const CTMap = (
     };
 
     // Audio Context
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audioContext = new AudioContext();
+    const audioContext = useContext(AudioReactContext);
     
     const mainGainNode = audioContext.createGain();
     mainGainNode.connect(audioContext.destination);
