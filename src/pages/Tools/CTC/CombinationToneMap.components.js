@@ -8,8 +8,6 @@ import { CTX } from './CombinationToneMap.context'
 export const CTControls = ( { change, handleLeftChange, handleRightChange, handleGridChange } ) => {
     const [appState, updateState] = useContext(CTX);
     const { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
-    console.log(appState);
-    console.log("leftMIDI: " + leftMIDI);
 
     let { noteName : leftNote, octave: leftOctave } = midiToNote(leftMIDI);
     let { noteName : rightNote, octave: rightOctave } = midiToNote(rightMIDI);
@@ -25,13 +23,29 @@ export const CTControls = ( { change, handleLeftChange, handleRightChange, handl
     )
 }
 
-export const CTSynthControls = ( { leftMIDI, rightMIDI, playOnHover, togglePlayOnHover, sustainOnClick, toggleSustainOnClick, synthVolume, handleVolumeChange } ) => {
-    
+export const CTSynthControls = ( ) => {
+    const [appState, updateState] = useContext(CTX);
+    // Synth controls
+    let { synthVolume, playOnHover, sustainOnClick } = appState.synthSettings;
+
+    const togglePlayOnHover = (e) => {
+        playOnHover = !playOnHover;
+        updateState({type: "TOGGLE_PLAY_ON_HOVER"});
+    }
+    const toggleSustainOnClick = (e) => { 
+        updateState({type: "TOGGLE_SUSTAIN_ON_CLICK"});
+    };
+    let handleVolumeChange = (e) => { 
+        let { value } = e.target;
+        updateState({type: "CHANGE_MASTER_VOLUME", payload: { value }});
+    };
+
+
     return (
         <StyledCTSynth >
             <h1>Synth Controls</h1>
-            <ControlContainer>Play on hover: <StyledCheckbox type="checkbox" onChange={togglePlayOnHover} checked={playOnHover} /></ControlContainer>
-            <ControlContainer>Sustain on click: <StyledCheckbox type="checkbox" onChange={toggleSustainOnClick} checked={sustainOnClick} /></ControlContainer>
+            <ControlContainer>Play on hover: <StyledCheckbox id="playOnHover" type="checkbox" onChange={togglePlayOnHover} checked={playOnHover} /></ControlContainer>
+            <ControlContainer>Sustain on click: <StyledCheckbox id="sustainOnClick" type="checkbox" onChange={toggleSustainOnClick} checked={sustainOnClick} /></ControlContainer>
             <ControlContainer>Volume: <ShortSlider id="volume" type="range" min="0" max="1" step="0.01" value={synthVolume} class="slider" onChange={handleVolumeChange}  /></ControlContainer>
         </StyledCTSynth>
     )

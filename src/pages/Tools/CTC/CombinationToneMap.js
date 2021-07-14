@@ -25,19 +25,19 @@ const CTMap = (
         updateState({type: "CHANGE_GRID_SIZE", payload: { value }});
     }
 
-    // Synth controls
-    let { synthVolume, playOnHover, sustainOnClick } = appState.synthSettings;
+    // // Synth controls
+    // let { synthVolume, playOnHover, sustainOnClick } = appState.synthSettings;
 
-    const togglePlayOnHover = () => {
-        updateState({type: "TOGGLE_PLAY_ON_HOVER"});
-    }
-    const toggleSustainOnClick = () => { 
-        updateState({type: "TOGGLE_SUSTAIN_ON_CLICK"});
-    };
-    let handleVolumeChange = (e) => { 
-        let { value } = e.target;
-        updateState({type: "CHANGE_MASTER_VOLUME", payload: { value }});
-    };
+    // const togglePlayOnHover = () => {
+    //     updateState({type: "TOGGLE_PLAY_ON_HOVER"});
+    // }
+    // const toggleSustainOnClick = () => { 
+    //     updateState({type: "TOGGLE_SUSTAIN_ON_CLICK"});
+    // };
+    // let handleVolumeChange = (e) => { 
+    //     let { value } = e.target;
+    //     updateState({type: "CHANGE_MASTER_VOLUME", payload: { value }});
+    // };
 
 
 
@@ -64,18 +64,15 @@ const CTMap = (
                         handleLeftChange={handleLeftChange}
                         handleRightChange={handleRightChange}
                         handleGridChange={handleGridChange} />
-                    <CTSynthControls leftMIDI={leftMIDI} rightMIDI={rightMIDI} 
-                        playOnHover={playOnHover} togglePlayOnHover={togglePlayOnHover}
-                        sustainOnClick={sustainOnClick} toggleSustainOnClick={toggleSustainOnClick}
-                        synthVolume={synthVolume} handleVolumeChange={handleVolumeChange}/>
+                    <CTSynthControls />
                 </StyledControlsContainer>
                 <CTGrid 
                     leftMIDI={leftMIDI} 
                     rightMIDI={rightMIDI} 
                     gridSize={gridSize} 
                     sustainGrid={sustainGrid}
-                    playOnHover={playOnHover}
-                    sustainOnClick={sustainOnClick}
+                    // playOnHover={playOnHover}
+                    // sustainOnClick={sustainOnClick}
                     handleGridClick={handleGridClick}
                     audioContext={CTX.actx}
                     mainGainNode={CTX.masterGain}/>

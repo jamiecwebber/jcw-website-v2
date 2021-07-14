@@ -31,6 +31,15 @@ export function reducer(state, action) {
             console.log(id);
             console.log(value);
             return {...state};
+        case "TOGGLE_PLAY_ON_HOVER":
+            let newToggle = !state.synthSettings.playOnHover;
+            return {...state, synthSettings: {...state.synthSettings, playOnHover: newToggle}};
+        case "TOGGLE_SUSTAIN_ON_CLICK":
+            let newSustain = !state.synthSettings.sustainOnClick;
+            return {...state, synthSettings: {...state.synthSettings, sustainOnClick: newSustain}};
+        case "CHANGE_MASTER_VOLUME":
+            masterGain.gain.value = value;
+            return {...state, synthSettings: {...state.synthSettings, volume: value}};
         default: 
             console.log("reducer error: action ", action);
             return {...state};
@@ -48,7 +57,7 @@ export default function Store(props) {
         synthSettings: {
             volume: masterGain.gain.value,
             playOnHover: true,
-            sustainOnClick: true
+            sustainOnClick: false
         }
     });
     return <CTX.Provider value={stateHook}>{props.children}</CTX.Provider>
