@@ -27,9 +27,9 @@ export const StyledControlsContainer = styled.div`
 `
 
 export const StyledCTControls = styled.div`
-    border: 8px solid limegreen;
+    border: 8px solid mediumpurple ;
     border-radius: 15px;
-    background-color: mediumpurple;
+    background-color: peachpuff;
     padding: 20px;
 `
 
@@ -59,7 +59,7 @@ export const StyledCTSynth = styled.div`
     margin-top: 7vh;
     margin-right: 3vh;
 
-    border: 8px solid lawngreen;
+    border: 8px solid limegreen;
     border-radius: 15px;
     background-color: cyan;
 

@@ -151,15 +151,16 @@ const GridNoteSynth = ({audioContext, mainGainNode, frequency, hover, click, sus
     )
 }
 
-const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sustainOnClick, sustainFromGrid, handleGridClick, audioContext, mainGainNode}) => {
+const GridNote = ({ left, right }) => {
 
-
-
+    const [appState, updateState] = useContext(CTX);
+    let { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
+    let { playOnHover, sustainOnClick } = appState.synthSettings;
 
     // set up local state for sustain
-    let [ sustain, setSustain ] = useState(sustainFromGrid);
-    let [ click, setClick ] = useState(0); // a hacky way to send clicks to children
-    let [ hover, setHover ] = useState(false);
+    let [ sustain, setSustain ] = useState(false);
+    // let [ click, setClick ] = useState(0); // a hacky way to send clicks to children
+    // let [ hover, setHover ] = useState(false);
 
     // return invisible space-holder for (0,0) grid
     if ( left === 0 & right === 0 ) { return <ZeroGridNote gridSize={gridSize}/> }; 
@@ -180,6 +181,9 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sust
         else if ( fibSeries[i] === left && fibSeries[i - 1] === right ) { colourToneLeft = true; };
     }
 
+
+
+
     // // this calcultates RGBA value for note (this is here rather than in styles for efficiency)
     // // RGBA max is (255, 255, 255, 1)
     // let max = 255;
@@ -198,42 +202,43 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sust
     let colour = "rgba(50, 230, 130, ";
 
     // SYNTH CONTROLS
-    let handleGridNoteClick = () => {
-        // play note
-        console.log(frequency);
-        setClick(click + 1); // triggers useEffect in synth... 
 
+    let handleGridNoteHover = () => {
+        if (playOnHover) {  
+            let value = { left, right, frequency };
+            updateState({type: "GRID_NOTE_HOVER_ON", payload: { value }});
+        };      
+    }
+
+    let handleGridNoteHoverOff = () => {
+        if (playOnHover) {
+            let value = { left, right };
+            updateState({type: "GRID_NOTE_HOVER_OFF", payload: { value }});
+        };
+    }
+
+    let handleGridClick = () => {
+        console.log(left);
+        console.log(right);
+        console.log(frequency);
         // locally toggle sustain
         if (sustain || sustainOnClick) {
             setSustain(!sustain)
         }
-
-        // send message to handleGridClick
-        handleGridClick({i:left, j:right})
-    }
-
-    let handleGridNoteHover = () => {
-        if (playOnHover) { setHover(true) };
-    }
-
-    let handleGridNoteHoverOff = () => {
-        setHover(false);
-    }
+    };
 
     return (
-        <StyledGridNote onClick={handleGridNoteClick} onMouseEnter={handleGridNoteHover} onMouseLeave={handleGridNoteHoverOff} gridSize={gridSize} colour={colour} octave={octave} colourToneLeft={colourToneLeft} colourToneRight={colourToneRight}>
+        <StyledGridNote onClick={handleGridClick} onMouseEnter={handleGridNoteHover} onMouseLeave={handleGridNoteHoverOff} gridSize={gridSize} colour={colour} octave={octave} colourToneLeft={colourToneLeft} colourToneRight={colourToneRight}>
             <GridNoteInfo  octave={octave} noteName={noteName} cents={cents} gridSize={gridSize} sustain={sustain}/>
             {/* <GridNoteSynth audioContext={audioContext} mainGainNode={mainGainNode} frequency={frequency} click={click} hover={hover} sustain={sustain}/> */}
         </StyledGridNote>
     )
 }
 
-export const CTGrid = ( { playOnHover, sustainOnClick, sustainGrid, handleGridClick, audioContext, mainGainNode } ) => {
-
-    // this can be greatly updated to keep a matrix of GridNote references alongside the sustainGrid
+export const CTGrid = ( { sustainGrid, handleGridClick } ) => {
 
     const [appState, updateState] = useContext(CTX);
-    const { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
+    const { gridSize } = appState.gridSettings;
 
     return (
         <StyledCTGrid >
@@ -244,17 +249,7 @@ export const CTGrid = ( { playOnHover, sustainOnClick, sustainGrid, handleGridCl
                             {
                             [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].slice(0,gridSize).map((j)=>{
                                 return (
-                                    <GridNote 
-                                        leftMIDI={leftMIDI} 
-                                        rightMIDI={rightMIDI} 
-                                        gridSize={gridSize} 
-                                        left={i} right={j} 
-                                        playOnHover={playOnHover}
-                                        sustainOnClick={sustainOnClick}
-                                        handleGridClick={handleGridClick}
-                                        sustainFromGrid={sustainGrid[i][j]}
-                                        audioContext={audioContext}
-                                        mainGainNode={mainGainNode}/>
+                                    <GridNote left={i} right={j} />
                                     )
                                 })
                             }
