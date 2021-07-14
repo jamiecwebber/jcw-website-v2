@@ -6,7 +6,7 @@ import {
     Nav, 
     NavbarContainer,
     NavTitleContainer,
-    NavLogo, 
+    NavLogo,
     NavIcon, 
     MobileIcon,
     NavMenu,
@@ -47,10 +47,10 @@ const Navbar = () => {
                         <NavTitleContainer>
                             <NavLogo to="/" onClick={closeMobileMenu}>
                                 {/* <NavIcon /> */}
-                                Jamie Christopher Webber - 
+                                Jamie Christopher Webber  
                             </NavLogo>
                             <NavLogo to="/" onClick={closeMobileMenu}>
-                                Composer & Audio Programmer
+                                - Composer & Audio Programmer
                             </NavLogo>
                         </NavTitleContainer>
                         <MobileIcon onClick={handleClick}>

@@ -196,9 +196,6 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sust
 
 export const CTGrid = ( { leftMIDI, rightMIDI, gridSize, playOnHover, sustainOnClick, sustainGrid, handleGridClick, audioContext, mainGainNode } ) => {
 
-
-
-
     // this can be greatly updated to keep a matrix of GridNote references alongside the sustainGrid
 
     return (

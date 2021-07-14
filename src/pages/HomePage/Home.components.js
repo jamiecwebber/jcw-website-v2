@@ -5,7 +5,7 @@ import { Container } from '../../globalStyles'  // important for resizing w mobi
 const SplashContainer = styled(Container)`
     z-index: 99;
     background-color: lightpink;
-    border: 3px solid pink;
+    border: 15px solid pink;
     height: 80vh;
     margin-top: min(5vw, 5vh);
     margin-bottom: 5vh;

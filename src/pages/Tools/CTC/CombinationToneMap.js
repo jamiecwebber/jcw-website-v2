@@ -49,7 +49,7 @@ const CTMap = (
 
     let handleVolumeChange = (event) => { 
         setSynthVolume(event.target.value);
-        mainGainNode.value(synthVolume); 
+        mainGainNode.gain.value = synthVolume; 
     };
 
     return (
