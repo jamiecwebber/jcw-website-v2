@@ -47,14 +47,14 @@ export function reducer(state, action) {
                 console.log(newHoverGrid[value.left][value.right]);
                 console.log(newHoverGrid[value.left][value.right+ 1]);
             }
-            let { osc, gainNode } = newHoverGrid[value.left][value.right];
+            let { oscNode: osc, gainNode } = newHoverGrid[value.left][value.right];
             gainNode.gain.cancelScheduledValues(actx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(1, actx.currentTime + 0.15);
+            gainNode.gain.linearRampToValueAtTime(1, actx.currentTime + 0.25);
             gainNode.gain.linearRampToValueAtTime(0.4, actx.currentTime + 0.4);
             console.log(newHoverGrid[value.left][value.right]);
             return {...state, hoverOscGrid: newHoverGrid};
         case "GRID_NOTE_HOVER_OFF":
-            let { oscOff, gainNode: gainOff } = state.hoverOscGrid[value.left][value.right];
+            let { oscNode: oscOff, gainNode: gainOff } = state.hoverOscGrid[value.left][value.right];
             console.log(state.hoverOscGrid);
             gainOff.gain.linearRampToValueAtTime(0, actx.currentTime + 1);
             setTimeout(()=>{reducer(state, {type: "KILL_HOVER_OSC", payload: { value:{left: value.left, right: value.right}}})}, 2000);
@@ -64,8 +64,8 @@ export function reducer(state, action) {
             let killHoverGrid = state.hoverOscGrid;
             if ( state.hoverOscGrid[value.left][value.right] ) {
                 let { oscNode: killOsc, gainNode: killGainNode } = killHoverGrid[value.left][value.right];
-                if (killGainNode.value === 0) {
-                    console.log(killOsc);
+                if (killGainNode.gain.value === 0.0) {
+                    console.log("kill osc " + killOsc);
                     killOsc.stop();
                     killOsc.disconnect();
                     killGainNode.disconnect();

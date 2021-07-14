@@ -211,6 +211,7 @@ const GridNote = ({ left, right }) => {
     }
 
     let handleGridNoteHoverOff = () => {
+        console.log("mouseLeave");
         if (playOnHover) {
             let value = { left, right };
             updateState({type: "GRID_NOTE_HOVER_OFF", payload: { value }});
