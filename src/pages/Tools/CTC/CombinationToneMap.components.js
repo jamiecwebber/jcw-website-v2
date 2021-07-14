@@ -8,6 +8,8 @@ import { CTX } from './CombinationToneMap.context'
 export const CTControls = ( { change, handleLeftChange, handleRightChange, handleGridChange } ) => {
     const [appState, updateState] = useContext(CTX);
     const { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
+    console.log(appState);
+    console.log("leftMIDI: " + leftMIDI);
 
     let { noteName : leftNote, octave: leftOctave } = midiToNote(leftMIDI);
     let { noteName : rightNote, octave: rightOctave } = midiToNote(rightMIDI);
@@ -16,8 +18,8 @@ export const CTControls = ( { change, handleLeftChange, handleRightChange, handl
         <StyledCTControls>
             <h1>Combination Tone Grid</h1>
                 <ControlContainer>
-                    <div>Left: {leftMIDI} {leftNote} {leftOctave} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <ShortSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftMidi"/></ControlContainer>
-                <ControlContainer><div>Right: {rightMIDI} {rightNote} { rightOctave } {midiToFrequency(rightMIDI).toFixed(2)} Hz</div><ShortSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightMidi"/></ControlContainer>
+                    <div>Left: {leftMIDI} {leftNote} {leftOctave} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <ShortSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftMIDI"/></ControlContainer>
+                <ControlContainer><div>Right: {rightMIDI} {rightNote} { rightOctave } {midiToFrequency(rightMIDI).toFixed(2)} Hz</div><ShortSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightMIDI"/></ControlContainer>
                 <ControlContainer>Grid Size: {gridSize} <LongSlider type="range" min="1" max="16" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </ControlContainer>
         </StyledCTControls>
     )
@@ -30,7 +32,7 @@ export const CTSynthControls = ( { leftMIDI, rightMIDI, playOnHover, togglePlayO
             <h1>Synth Controls</h1>
             <ControlContainer>Play on hover: <StyledCheckbox type="checkbox" onChange={togglePlayOnHover} checked={playOnHover} /></ControlContainer>
             <ControlContainer>Sustain on click: <StyledCheckbox type="checkbox" onChange={toggleSustainOnClick} checked={sustainOnClick} /></ControlContainer>
-            <ControlContainer>Volume: <ShortSlider type="range" min="0" max="1" step="0.01" value={synthVolume} class="slider" onChange={handleVolumeChange}  /></ControlContainer>
+            <ControlContainer>Volume: <ShortSlider id="volume" type="range" min="0" max="1" step="0.01" value={synthVolume} class="slider" onChange={handleVolumeChange}  /></ControlContainer>
         </StyledCTSynth>
     )
 }

@@ -4,8 +4,6 @@ import { CTGrid, CTControls, CTSynthControls } from './CombinationToneMap.compon
 
 import { CTX } from './CombinationToneMap.context'
 
-console.log(CTX);
-
 const CTMap = (
 ) => {
     const [appState, updateState] = useContext(CTX);

@@ -17,10 +17,17 @@ export function reducer(state, action) {
     switch(action.type){
         case "CHANGE_LEFT_MIDI":
             // apply necessary logic to update left MIDI
+            console.log(action.type);
+            console.log(id);
+            console.log(value);
             return {...state, gridSettings: {...state.gridSettings, leftMidi: value}};
         case "CHANGE_RIGHT_MIDI":
+            console.log(action.type);
+            console.log(id);
+            console.log(value);
             return {...state, gridSettings: {...state.gridSettings, rightMidi: value}};
         case "CHANGE_GRID_SIZE":
+            console.log(action.type);
             console.log(id);
             console.log(value);
             return {...state};
@@ -34,8 +41,8 @@ export default function Store(props) {
     const stateHook = React.useReducer(reducer, {
         // this is the object that sends the initial values to React
         gridSettings: {
-            leftMidi: 40,
-            rightMidi: 47,
+            leftMIDI: 40,
+            rightMIDI: 47,
             gridSize: 10
         },
         synthSettings: {
