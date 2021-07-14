@@ -1,7 +1,7 @@
 import { StyledCTGrid, GridColumn, ZeroGridNote, StyledGridNote, GridNoteMain, GridNoteName, GridNoteCentsAndOctave, StyledCTControls, StyledCTSynth, ControlContainer, ShortSlider, LongSlider, StyledCheckbox, GridNoteCentsAndOctaveDiv } from './CombinationToneMap.styles'
 import { useState, useEffect, useRef } from 'react';
-import { midiToFrequency, midiToNote, frequencyToMidicents, splitMidicents} from '../../../globalFunctions'
-
+import { midiToFrequency, midiToNote, frequencyToMidicents, splitMidicents} from '../../../globalFunctions';
+import { CTX } from './CombinationToneMap.context'
 
 // components
 
