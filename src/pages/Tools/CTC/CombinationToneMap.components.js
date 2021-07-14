@@ -159,8 +159,6 @@ const GridNote = ({ left, right }) => {
 
     // set up local state for sustain
     let [ sustain, setSustain ] = useState(false);
-    // let [ click, setClick ] = useState(0); // a hacky way to send clicks to children
-    // let [ hover, setHover ] = useState(false);
 
     // return invisible space-holder for (0,0) grid
     if ( left === 0 & right === 0 ) { return <ZeroGridNote gridSize={gridSize}/> }; 
@@ -211,7 +209,6 @@ const GridNote = ({ left, right }) => {
     }
 
     let handleGridNoteHoverOff = () => {
-        console.log("mouseLeave");
         if (playOnHover) {
             let value = { left, right };
             updateState({type: "GRID_NOTE_HOVER_OFF", payload: { value }});
@@ -222,16 +219,20 @@ const GridNote = ({ left, right }) => {
         console.log(left);
         console.log(right);
         console.log(frequency);
-        // locally toggle sustain
         if (sustain || sustainOnClick) {
-            setSustain(!sustain)
+            let value = { left, right, frequency };
+            if (sustain) {
+                updateState({type: "GRID_NOTE_SUSTAIN_OFF", payload: { value }});
+            } else {
+                updateState({type: "GRID_NOTE_SUSTAIN_ON", payload: { value }});
+            }
+            setSustain(!sustain); // locally toggle sustain
         }
     };
 
     return (
         <StyledGridNote onClick={handleGridClick} onMouseEnter={handleGridNoteHover} onMouseLeave={handleGridNoteHoverOff} gridSize={gridSize} colour={colour} octave={octave} colourToneLeft={colourToneLeft} colourToneRight={colourToneRight}>
             <GridNoteInfo  octave={octave} noteName={noteName} cents={cents} gridSize={gridSize} sustain={sustain}/>
-            {/* <GridNoteSynth audioContext={audioContext} mainGainNode={mainGainNode} frequency={frequency} click={click} hover={hover} sustain={sustain}/> */}
         </StyledGridNote>
     )
 }

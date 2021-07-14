@@ -32,47 +32,74 @@ export function reducer(state, action) {
             return {...state, synthSettings: {...state.synthSettings, volume: value}};
         case "GRID_NOTE_HOVER_ON":
             let newHoverGrid = state.hoverOscGrid;
-            console.log(value);
-            if (!newHoverGrid[value.left][value.right]) { // assuming that already having an osc set means it returns true
-                console.log("new Osc");
+            if (!newHoverGrid[value.left][value.right]) {
                 let newOsc = actx.createOscillator();
                 let newGain = actx.createGain();
                 newOsc.frequency.value = value.frequency;
+                newOsc.type = "triangle";
                 newGain.gain.setValueAtTime(0, actx.currentTime);
                 newOsc.connect(newGain);
                 newOsc.start();
                 newGain.connect(masterGain);
                 newHoverGrid[value.left][value.right] = {oscNode: newOsc, gainNode: newGain};
-                console.log(newHoverGrid[value.left]);
-                console.log(newHoverGrid[value.left][value.right]);
-                console.log(newHoverGrid[value.left][value.right+ 1]);
             }
             let { oscNode: osc, gainNode } = newHoverGrid[value.left][value.right];
             gainNode.gain.cancelScheduledValues(actx.currentTime);
             gainNode.gain.linearRampToValueAtTime(1, actx.currentTime + 0.25);
-            gainNode.gain.linearRampToValueAtTime(0.4, actx.currentTime + 0.4);
-            console.log(newHoverGrid[value.left][value.right]);
+            gainNode.gain.linearRampToValueAtTime(0.6, actx.currentTime + 0.4);
             return {...state, hoverOscGrid: newHoverGrid};
         case "GRID_NOTE_HOVER_OFF":
             let { oscNode: oscOff, gainNode: gainOff } = state.hoverOscGrid[value.left][value.right];
-            console.log(state.hoverOscGrid);
             gainOff.gain.linearRampToValueAtTime(0, actx.currentTime + 1);
             setTimeout(()=>{reducer(state, {type: "KILL_HOVER_OSC", payload: { value:{left: value.left, right: value.right}}})}, 2000);
             return {...state};
         case "KILL_HOVER_OSC":
-            console.log(action);
             let killHoverGrid = state.hoverOscGrid;
             if ( state.hoverOscGrid[value.left][value.right] ) {
                 let { oscNode: killOsc, gainNode: killGainNode } = killHoverGrid[value.left][value.right];
                 if (killGainNode.gain.value === 0.0) {
-                    console.log("kill osc " + killOsc);
                     killOsc.stop();
                     killOsc.disconnect();
                     killGainNode.disconnect();
                     killHoverGrid[value.left][value.right] = false;
                 }
             }
-            return {...state, hoverOscGrid: killHoverGrid}
+            return {...state, hoverOscGrid: killHoverGrid};
+        case "GRID_NOTE_SUSTAIN_ON":
+            let newSustainGrid = state.sustainOscGrid;
+            if (!newSustainGrid[value.left][value.right]) {
+                let newOsc = actx.createOscillator();
+                let newGain = actx.createGain();
+                newOsc.frequency.value = value.frequency;
+                newOsc.type = "sine";
+                newGain.gain.setValueAtTime(0, actx.currentTime);
+                newOsc.connect(newGain);
+                newOsc.start();
+                newGain.connect(masterGain);
+                newSustainGrid[value.left][value.right] = {oscNode: newOsc, gainNode: newGain};
+            }
+            let { oscNode: susOscNode, gainNode: susGainNode } = newSustainGrid[value.left][value.right];
+            susGainNode.gain.cancelScheduledValues(actx.currentTime);
+            susGainNode.gain.linearRampToValueAtTime(0.8, actx.currentTime + 1);
+            susGainNode.gain.linearRampToValueAtTime(0.4, actx.currentTime + 1.5);
+            return {...state, sustainOscGrid: newSustainGrid};
+        case "GRID_NOTE_SUSTAIN_OFF":
+            let { oscNode: susOscOff, gainNode: susGainOff } = state.sustainOscGrid[value.left][value.right];
+            susGainOff.gain.linearRampToValueAtTime(0, actx.currentTime + 3);
+            setTimeout(()=>{reducer(state, {type: "KILL_SUSTAIN_OSC", payload: { value:{left: value.left, right: value.right}}})}, 5000);
+            return {...state};
+        case "KILL_SUSTAIN_OSC":
+            let killSustainGrid = state.sustainOscGrid;
+            if ( state.sustainOscGrid[value.left][value.right] ) {
+                let { oscNode: killOsc, gainNode: killGainNode } = killSustainGrid[value.left][value.right];
+                if (killGainNode.gain.value === 0.0) {
+                    killOsc.stop();
+                    killOsc.disconnect();
+                    killGainNode.disconnect();
+                    killSustainGrid[value.left][value.right] = false;
+                }
+            }
+            return {...state, hoverOscGrid: killSustainGrid};
         default: 
             console.log("reducer error: action ", action);
             return {...state};
