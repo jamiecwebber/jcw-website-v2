@@ -5,12 +5,25 @@ import { CTX } from './CombinationToneMap.context'
 
 // components
 
-export const CTControls = ( { change, handleLeftChange, handleRightChange, handleGridChange } ) => {
+export const CTControls = ( { change } ) => {
     const [appState, updateState] = useContext(CTX);
     const { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
 
     let { noteName : leftNote, octave: leftOctave } = midiToNote(leftMIDI);
     let { noteName : rightNote, octave: rightOctave } = midiToNote(rightMIDI);
+    
+    const handleLeftChange = (e) => {
+        let { value } = e.target;
+        updateState({type: "CHANGE_LEFT_MIDI", payload: { value }});
+    }
+    const handleRightChange = (e) => {
+        let { value } = e.target;
+        updateState({type: "CHANGE_RIGHT_MIDI", payload: { value }});
+    }
+    const handleGridChange = (e) => {
+        let {value} = e.target;
+        updateState({type: "CHANGE_GRID_SIZE", payload: { value }});
+    }
 
     return (
         <StyledCTControls>
@@ -29,7 +42,7 @@ export const CTSynthControls = ( ) => {
     let { synthVolume, playOnHover, sustainOnClick } = appState.synthSettings;
 
     const togglePlayOnHover = (e) => {
-        playOnHover = !playOnHover;
+        // playOnHover = !playOnHover;  -- not sure this line is needed, will find out when synth makes sound
         updateState({type: "TOGGLE_PLAY_ON_HOVER"});
     }
     const toggleSustainOnClick = (e) => { 
@@ -140,6 +153,9 @@ const GridNoteSynth = ({audioContext, mainGainNode, frequency, hover, click, sus
 
 const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sustainOnClick, sustainFromGrid, handleGridClick, audioContext, mainGainNode}) => {
 
+
+
+
     // set up local state for sustain
     let [ sustain, setSustain ] = useState(sustainFromGrid);
     let [ click, setClick ] = useState(0); // a hacky way to send clicks to children
@@ -212,9 +228,12 @@ const GridNote = ({leftMIDI, rightMIDI, gridSize, left, right, playOnHover, sust
     )
 }
 
-export const CTGrid = ( { leftMIDI, rightMIDI, gridSize, playOnHover, sustainOnClick, sustainGrid, handleGridClick, audioContext, mainGainNode } ) => {
+export const CTGrid = ( { playOnHover, sustainOnClick, sustainGrid, handleGridClick, audioContext, mainGainNode } ) => {
 
     // this can be greatly updated to keep a matrix of GridNote references alongside the sustainGrid
+
+    const [appState, updateState] = useContext(CTX);
+    const { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
 
     return (
         <StyledCTGrid >

@@ -17,20 +17,11 @@ export function reducer(state, action) {
     switch(action.type){
         case "CHANGE_LEFT_MIDI":
             // apply necessary logic to update left MIDI
-            console.log(action.type);
-            console.log(id);
-            console.log(value);
-            return {...state, gridSettings: {...state.gridSettings, leftMidi: value}};
+            return {...state, gridSettings: {...state.gridSettings, leftMIDI: value}};
         case "CHANGE_RIGHT_MIDI":
-            console.log(action.type);
-            console.log(id);
-            console.log(value);
-            return {...state, gridSettings: {...state.gridSettings, rightMidi: value}};
+            return {...state, gridSettings: {...state.gridSettings, rightMIDI: value}};
         case "CHANGE_GRID_SIZE":
-            console.log(action.type);
-            console.log(id);
-            console.log(value);
-            return {...state};
+            return {...state, gridSettings: {...state.gridSettings, gridSize: value}};
         case "TOGGLE_PLAY_ON_HOVER":
             let newToggle = !state.synthSettings.playOnHover;
             return {...state, synthSettings: {...state.synthSettings, playOnHover: newToggle}};

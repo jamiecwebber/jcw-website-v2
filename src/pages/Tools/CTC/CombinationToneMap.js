@@ -10,20 +10,20 @@ const CTMap = (
 
     // Grid controls
 
-    let { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
+    // let { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
     
-    const handleLeftChange = (e) => {
-        let { value } = e.target;
-        updateState({type: "CHANGE_LEFT_MIDI", payload: { value }});
-    }
-    const handleRightChange = (e) => {
-        let { value } = e.target;
-        updateState({type: "CHANGE_RIGHT_MIDI", payload: { value }});
-    }
-    const handleGridChange = (e) => {
-        let {value} = e.target;
-        updateState({type: "CHANGE_GRID_SIZE", payload: { value }});
-    }
+    // const handleLeftChange = (e) => {
+    //     let { value } = e.target;
+    //     updateState({type: "CHANGE_LEFT_MIDI", payload: { value }});
+    // }
+    // const handleRightChange = (e) => {
+    //     let { value } = e.target;
+    //     updateState({type: "CHANGE_RIGHT_MIDI", payload: { value }});
+    // }
+    // const handleGridChange = (e) => {
+    //     let {value} = e.target;
+    //     updateState({type: "CHANGE_GRID_SIZE", payload: { value }});
+    // }
 
     // // Synth controls
     // let { synthVolume, playOnHover, sustainOnClick } = appState.synthSettings;
@@ -60,16 +60,13 @@ const CTMap = (
     return (
             <CTContainer>
                 <StyledControlsContainer>
-                    <CTControls 
-                        handleLeftChange={handleLeftChange}
-                        handleRightChange={handleRightChange}
-                        handleGridChange={handleGridChange} />
+                    <CTControls />
                     <CTSynthControls />
                 </StyledControlsContainer>
                 <CTGrid 
-                    leftMIDI={leftMIDI} 
-                    rightMIDI={rightMIDI} 
-                    gridSize={gridSize} 
+                    // leftMIDI={leftMIDI} 
+                    // rightMIDI={rightMIDI} 
+                    // gridSize={gridSize} 
                     sustainGrid={sustainGrid}
                     // playOnHover={playOnHover}
                     // sustainOnClick={sustainOnClick}
