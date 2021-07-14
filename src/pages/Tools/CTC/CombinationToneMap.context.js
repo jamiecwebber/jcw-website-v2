@@ -7,10 +7,8 @@ export const CTX = React.createContext();
 let actx = new AudioContext();
 let out = actx.destination;
 
-let masterGain = actx.createGain();
+let masterGain = actx.createGain(0.6);
 masterGain.connect(out);
-
-
 
 // Reducer and app state
 export function reducer(state, action) {
@@ -22,6 +20,8 @@ export function reducer(state, action) {
         case "CHANGE_RIGHT_MIDI":
             return {...state, gridSettings: {...state.gridSettings, rightMidi: value}};
         case "CHANGE_GRID_SIZE":
+            console.log(id);
+            console.log(value);
             return {...state};
         default: 
             console.log("reducer error: action ", action);
@@ -31,14 +31,14 @@ export function reducer(state, action) {
 
 export default function Store(props) {
     const stateHook = React.useReducer(reducer, {
-        // this is the object with all the initial values
+        // this is the object that sends the initial values to React
         gridSettings: {
             leftMidi: 40,
             rightMidi: 47,
             gridSize: 10
         },
         synthSettings: {
-            volume: 0.6,
+            volume: masterGain.volume.value,
             playOnHover: true,
             sustainOnClick: true
         }

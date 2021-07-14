@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import { CTContainer, StyledControlsContainer } from './CombinationToneMap.styles'
 import { CTGrid, CTControls, CTSynthControls } from './CombinationToneMap.components'
-import Store from './CombinationToneMap.context'
-import { CTX } from './CombinationToneMap.context'
+import Store, { CTX } from './CombinationToneMap.context'
+
 
 const CTMap = (
 ) => {
+    const [appState, updateState] = useContext(CTX);
+
     // Grid controls
     // const [leftMIDI, setLeftMIDI] = useState(40);
     // const [rightMIDI, setRightMIDI] = useState(47);
@@ -19,6 +21,21 @@ const CTMap = (
     //     setGridSize(event.target.value);
     // }
 
+    let { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
+    
+    const handleLeftChange = (e) => {
+        let { value } = e.target;
+        updateState({type: "CHANGE_LEFT_MIDI", payload: { value }});
+    }
+    const handleRightChange = (e) => {
+        let { value } = e.target;
+        updateState({type: "CHANGE_RIGHT_MIDI", payload: { value }});
+    }
+    const handleGridChange = (e) => {
+        let {value} = e.target;
+        updateState({type: "CHANGE_GRID_SIZE", payload: { value }});
+    }
+
     // // Synth controls
     // let [playOnHover, setPlayOnHover] = useState(true);
     // let [sustainOnClick, setSustainOnClick] = useState(true);
@@ -27,19 +44,19 @@ const CTMap = (
     // let togglePlayOnHover = () => {setPlayOnHover(!playOnHover)};
     // let toggleSustainOnClick = () => { setSustainOnClick(!sustainOnClick) };
 
-    let handleGridClick = ({i,j}) => {
-        console.log(i);
-        console.log(j);
+    // let handleGridClick = ({i,j}) => {
+    //     console.log(i);
+    //     console.log(j);
 
-        // // play note
+    //     // // play note
 
-        // // if sustain is on, add to sustain grid
-        // if (sustainGrid[i][j] || sustainOnClick) {
-        //     let newGrid = sustainGrid;
-        //     newGrid[i][j] = !newGrid[i][j]
-        //     setSustainGrid(newGrid);
-        // }
-    };
+    //     // // if sustain is on, add to sustain grid
+    //     // if (sustainGrid[i][j] || sustainOnClick) {
+    //     //     let newGrid = sustainGrid;
+    //     //     newGrid[i][j] = !newGrid[i][j]
+    //     //     setSustainGrid(newGrid);
+    //     // }
+    // };
 
     // // Audio Context
     // const audioContext = useContext(AudioReactContext);
@@ -58,9 +75,9 @@ const CTMap = (
             <CTContainer>
                 <StyledControlsContainer>
                     <CTControls 
-                        leftMIDI={leftMIDI} handleLeftChange={handleLeftChange}
-                        rightMIDI={rightMIDI} handleRightChange={handleRightChange}
-                        gridSize={gridSize} handleGridChange={handleGridChange} />
+                        handleLeftChange={handleLeftChange}
+                        handleRightChange={handleRightChange}
+                        handleGridChange={handleGridChange} />
                     <CTSynthControls leftMIDI={leftMIDI} rightMIDI={rightMIDI} 
                         playOnHover={playOnHover} togglePlayOnHover={togglePlayOnHover}
                         sustainOnClick={sustainOnClick} toggleSustainOnClick={toggleSustainOnClick}

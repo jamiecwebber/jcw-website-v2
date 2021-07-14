@@ -1,11 +1,13 @@
 import { StyledCTGrid, GridColumn, ZeroGridNote, StyledGridNote, GridNoteMain, GridNoteName, GridNoteCentsAndOctave, StyledCTControls, StyledCTSynth, ControlContainer, ShortSlider, LongSlider, StyledCheckbox, GridNoteCentsAndOctaveDiv } from './CombinationToneMap.styles'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { midiToFrequency, midiToNote, frequencyToMidicents, splitMidicents} from '../../../globalFunctions';
 import { CTX } from './CombinationToneMap.context'
 
 // components
 
-export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, handleRightChange, handleGridChange } ) => {
+export const CTControls = ( { change, handleLeftChange, handleRightChange, handleGridChange } ) => {
+    const [appState, updateState] = useContext(CTX);
+    const { leftMIDI, rightMIDI, gridSize } = appState.gridSettings;
 
     let { noteName : leftNote, octave: leftOctave } = midiToNote(leftMIDI);
     let { noteName : rightNote, octave: rightOctave } = midiToNote(rightMIDI);
@@ -14,8 +16,8 @@ export const CTControls = ( { leftMIDI, rightMIDI, gridSize, handleLeftChange, h
         <StyledCTControls>
             <h1>Combination Tone Grid</h1>
                 <ControlContainer>
-                    <div>Left: {leftMIDI} {leftNote} {leftOctave} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <ShortSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftSlider"/></ControlContainer>
-                <ControlContainer><div>Right: {rightMIDI} {rightNote} { rightOctave } {midiToFrequency(rightMIDI).toFixed(2)} Hz</div><ShortSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightSlider"/></ControlContainer>
+                    <div>Left: {leftMIDI} {leftNote} {leftOctave} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <ShortSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftMidi"/></ControlContainer>
+                <ControlContainer><div>Right: {rightMIDI} {rightNote} { rightOctave } {midiToFrequency(rightMIDI).toFixed(2)} Hz</div><ShortSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightMidi"/></ControlContainer>
                 <ControlContainer>Grid Size: {gridSize} <LongSlider type="range" min="1" max="16" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </ControlContainer>
         </StyledCTControls>
     )
