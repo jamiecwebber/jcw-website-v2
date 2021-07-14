@@ -8,6 +8,7 @@ import CTMap from './pages/Tools/CTC/CombinationToneMap'
 import Blog from './pages/Blog/Blog';
 import ScrollToTop from './components/ScrollToTop';
 import { Navbar, Footer } from './components';
+import Store from './pages/Tools/CTC/CombinationToneMap.context';
 
 
 
@@ -22,7 +23,8 @@ function App() {
   
 
   return (
-    <AudioReactContext.Provider value={audioContext}>
+
+    <Store>
       <Router>
         <GlobalStyle />
         <ScrollToTop />
@@ -35,7 +37,7 @@ function App() {
           <Route path='/blog' exact component={Blog} />
         </Switch>
       </Router>
-    </AudioReactContext.Provider>
+    </Store>
   );
 }
 

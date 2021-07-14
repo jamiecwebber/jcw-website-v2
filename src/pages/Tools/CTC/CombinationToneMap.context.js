@@ -1,7 +1,8 @@
 import React from 'react';
 
 // Create React context
-export const CTX = React.createContext();
+const CTX = React.createContext();
+export { CTX };
 
 // Web Audio basics go here
 let actx = new AudioContext();
@@ -38,10 +39,10 @@ export default function Store(props) {
             gridSize: 10
         },
         synthSettings: {
-            volume: masterGain.volume.value,
+            volume: masterGain.gain.value,
             playOnHover: true,
             sustainOnClick: true
         }
     });
-    return <CTX.Provider>{props.children}</CTX.Provider>
+    return <CTX.Provider value={stateHook}>{props.children}</CTX.Provider>
 }
