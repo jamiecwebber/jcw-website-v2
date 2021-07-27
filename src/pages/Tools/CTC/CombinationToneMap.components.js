@@ -197,7 +197,7 @@ const GridNote = ({ left, right }) => {
     //     calculateColour((hue > 0.5) ? hue - 1 : hue) + ", " + 
     //     calculateColour((hue - 0.333) > 0.5 ? hue - 1.333 : hue - 0.333) + ", " + 
     //     calculateColour((hue - 0.666) < -0.5 ? hue + 0.333 : hue - 0.666) + ", "; 
-    let colour = "rgba(50, 230, 130, ";
+    let colour = "rgba(50, 230, 50, ";
 
     // SYNTH CONTROLS
 

@@ -7,7 +7,6 @@ const SplashContainer = styled(Container)`
     background-color: lightpink;
     border: 15px solid pink;
     height: 80vh;
-    margin-top: min(5vw, 5vh);
     margin-bottom: 5vh;
     width: 100%;
     background-image: url(${({ img }) => ( img )}); // 4096 * 3072
@@ -16,13 +15,12 @@ const SplashContainer = styled(Container)`
     background-repeat: no-repeat;
 `
 
-// const SplashImage = styled.div`
-//     width: 132vh;
-//     padding-top: 75%; /* 4:3 Aspect Ratio */
-//     position: relative; /* If you want text inside of it */
-//     border: 5px solid green;
-
-// `
+const SplashImage = styled.div`
+    width: 132vh;
+     padding-top: 75%; /* 4:3 Aspect Ratio */
+     position: relative; /* If you want text inside of it */
+     border: 5px solid green;
+ `
 
 const SplashWelcomeHeader = styled.h1`
     position: absolute;
@@ -44,11 +42,15 @@ const SplashWelcomeHeader = styled.h1`
     font-family: 'Apple Chancery', cursive;
 `
 
+const SplashVideo = styled.video`
+    height:100%;
+ `
+
 export const HomepageSplash = (homepagebackground) => {
     return (
-        <SplashContainer img={require('../../images/homepagebackground.jpg').default}>
-            {/* <SplashImage > */}
-                <SplashWelcomeHeader>Thank you for visiting my website</SplashWelcomeHeader>
+        <SplashContainer>
+            <SplashVideo src='../../images/canwelearntocontrolthispower.webm'></SplashVideo>
+            {/* <SplashWelcomeHeader>Thank you for visiting my website</SplashWelcomeHeader> */}
             {/* </SplashImage> */}
         </SplashContainer>
     )

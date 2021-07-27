@@ -8,10 +8,12 @@ const Home = () => {
     return (
         <>
             <HomepageSplash/> 
-            <BackgroundSection {...homeObjOne}/>
-            <BackgroundSection {...homeObjTwo}/>
+
         </>
     )
 }
 
 export default Home
+
+    //            <BackgroundSection {...homeObjOne}/>
+    //  < BackgroundSection {...homeObjTwo } />

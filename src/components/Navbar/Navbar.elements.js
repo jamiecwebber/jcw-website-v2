@@ -23,6 +23,7 @@ export const NavbarContainer = styled(Container)`
     display: flex;
     justify-content: space-between;
     height: 50px;
+    margin-top: 0px;
 
     ${Container}
 
@@ -42,7 +43,7 @@ export const NavTitleContainer = styled.div`
 
 export const NavLogo = styled(Link)`
     
-    color: WhiteSmoke;
+    color: #5c3a2c;
     justify-self: flex-start;
     cursor: pointer;
     text-decoration: none;
@@ -101,7 +102,7 @@ export const NavMenu = styled.ul`
 
 export const NavItem = styled.li`
     height: 50px;
-    border-bottom: 3px solid transparent;
+    border-bottom: 5px solid transparent;
 
     &:hover {
         border-bottom: 5px solid Thistle;
