@@ -119,8 +119,8 @@ export default function Store(props) {
             playOnHover: true,
             sustainOnClick: false
         },
-        hoverOscGrid: [...Array(16)].map(() => Array(16).fill(false)),
-        sustainOscGrid: [...Array(16)].map(() => Array(16).fill(false))
+        hoverOscGrid: [...Array(17)].map(() => Array(17).fill(false)),
+        sustainOscGrid: [...Array(17)].map(() => Array(17).fill(false))
     });
     return <CTX.Provider value={stateHook}>{props.children}</CTX.Provider>
 }

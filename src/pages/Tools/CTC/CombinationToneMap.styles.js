@@ -95,7 +95,7 @@ export const StyledGridNote = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${({ colour, octave }) => (colour + (0.8 - (octave * 0.10 ))) + ")"};
+    background-color: ${({ colour, octave }) => (colour + (0.85 - (octave * 0.08 ))) + ")"};
     rotate: -180deg;
     width: ${({gridSize}) => ((55/gridSize) + "vh")};
     height: ${({gridSize}) => ((55/gridSize) + "vh")};

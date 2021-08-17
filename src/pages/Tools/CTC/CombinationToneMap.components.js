@@ -31,7 +31,7 @@ export const CTControls = ( { change } ) => {
                 <ControlContainer>
                     <div>Left: {leftMIDI} {leftNote} {leftOctave} {midiToFrequency(leftMIDI).toFixed(2)} Hz</div> <ShortSlider type="range" min="1" max="108" value={leftMIDI} class="slider" onChange={handleLeftChange} id="leftMIDI"/></ControlContainer>
                 <ControlContainer><div>Right: {rightMIDI} {rightNote} { rightOctave } {midiToFrequency(rightMIDI).toFixed(2)} Hz</div><ShortSlider type="range" min="1" max="108" value={rightMIDI} class="slider" onChange={handleRightChange} id="rightMIDI"/></ControlContainer>
-                <ControlContainer>Grid Size: {gridSize} <LongSlider type="range" min="1" max="16" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </ControlContainer>
+                <ControlContainer>Grid Size: {gridSize} <LongSlider type="range" min="1" max="17" value={gridSize} class="slider" onChange={handleGridChange} id="gridSizeSlider" /> </ControlContainer>
         </StyledCTControls>
     )
 }
@@ -258,11 +258,11 @@ export const CTGrid = ( { sustainGrid, handleGridClick } ) => {
     return (
         <StyledCTGrid >
             {
-                [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].slice(0,gridSize).map((i) => {
+                [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].slice(0,gridSize).map((i) => {
                     return (
                         <GridColumn>
                             {
-                            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].slice(0,gridSize).map((j)=>{
+                            [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].slice(0,gridSize).map((j)=>{
                                 return (
                                     <GridNote left={i} right={j} />
                                     )
