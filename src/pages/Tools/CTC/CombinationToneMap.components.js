@@ -151,6 +151,40 @@ const GridNoteSynth = ({audioContext, mainGainNode, frequency, hover, click, sus
     )
 }
 
+
+// make array of 36 colour strings
+
+// this calcultates RGBA value for note (this is here rather than in styles for efficiency)
+// RGBA max is (255, 255, 255, 1)
+const calculateColour = ( intensity ) => {
+    return (0.25 - Math.pow(intensity, 2)) * 4 * 255;
+}
+
+const colourStrings = 
+[...Array(36).keys()].map((note)=>{
+    let hue = note / 36;
+    return ("rgba(" + 
+    calculateColour((hue > 0.5) ? hue - 1 : hue) + ", " + 
+    calculateColour((hue - 0.333) > 0.5 ? hue - 1.333 : hue - 0.333) + ", " + 
+    calculateColour((hue - 0.666) < -0.5 ? hue + 0.333 : hue - 0.666) + ", ");
+})
+
+// note: value between 0 and 11 for C to B
+// note : value between 0 and 35 for C𝄯 to B𝄮
+// let hue = ((note * 100) + cents)/1200; // gives value between 0 and 1 to 3 decimal points
+// if ( hue < 0 ) { hue = hue + 1 };
+
+
+// // this centers the hue values around (-0.5, 0.5) to use the above calculation
+// // string is incomplete because transparency is calculated on the styled components side based on octave
+// let colour = "rgba(" + 
+//     calculateColour((hue > 0.5) ? hue - 1 : hue) + ", " + 
+//     calculateColour((hue - 0.333) > 0.5 ? hue - 1.333 : hue - 0.333) + ", " + 
+//     calculateColour((hue - 0.666) < -0.5 ? hue + 0.333 : hue - 0.666) + ", "; 
+
+
+
+
 const GridNote = ({ left, right }) => {
 
     const [appState, updateState] = useContext(CTX);
@@ -166,8 +200,7 @@ const GridNote = ({ left, right }) => {
     // calculate frequency, note, cents, and octave
     let frequency = (left * midiToFrequency(leftMIDI) + right * midiToFrequency(rightMIDI));
     let midicents = frequencyToMidicents(frequency)
-    let { midi, cents } = splitMidicents(midicents);
-    let { noteName, octave, note } = midiToNote(midi);
+    let { midi, cents, noteName, octave, note } = splitMidicents(midicents);
 
     // determine whether this note is part of a fibonacci-like series
     // could be edited to take into account gridSize and not have to use an array
@@ -178,26 +211,6 @@ const GridNote = ({ left, right }) => {
         if ( fibSeries[i] === right && fibSeries[i - 1] === left ) { colourToneRight = true; }
         else if ( fibSeries[i] === left && fibSeries[i - 1] === right ) { colourToneLeft = true; };
     }
-
-
-
-
-    // // this calcultates RGBA value for note (this is here rather than in styles for efficiency)
-    // // RGBA max is (255, 255, 255, 1)
-    // let max = 255;
-    // let hue = ((note * 100) + cents)/1200; // gives value between 0 and 3 to 3 decimal points
-    // if ( hue < 0 ) { hue = hue + 1 };
-    // let calculateColour = ( intensity ) => {
-    //     return (0.25 - Math.pow(intensity, 2)) * 4 * max;
-    // }
-
-    // // this centers the hue values around (-0.5, 0.5) to use the above calculation
-    // // string is incomplete because transparency is calculated on the styled components side based on octave
-    // let colour = "rgba(" + 
-    //     calculateColour((hue > 0.5) ? hue - 1 : hue) + ", " + 
-    //     calculateColour((hue - 0.333) > 0.5 ? hue - 1.333 : hue - 0.333) + ", " + 
-    //     calculateColour((hue - 0.666) < -0.5 ? hue + 0.333 : hue - 0.666) + ", "; 
-    let colour = "rgba(50, 230, 50, ";
 
     // SYNTH CONTROLS
 
@@ -231,7 +244,7 @@ const GridNote = ({ left, right }) => {
     };
 
     return (
-        <StyledGridNote onClick={handleGridClick} onMouseEnter={handleGridNoteHover} onMouseLeave={handleGridNoteHoverOff} gridSize={gridSize} colour={colour} octave={octave} colourToneLeft={colourToneLeft} colourToneRight={colourToneRight}>
+        <StyledGridNote onClick={handleGridClick} onMouseEnter={handleGridNoteHover} onMouseLeave={handleGridNoteHoverOff} gridSize={gridSize} colour={colourStrings[note]} octave={octave} colourToneLeft={colourToneLeft} colourToneRight={colourToneRight}>
             <GridNoteInfo  octave={octave} noteName={noteName} cents={cents} gridSize={gridSize} sustain={sustain}/>
         </StyledGridNote>
     )
